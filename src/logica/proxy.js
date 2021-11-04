@@ -4,31 +4,24 @@
 // Creado: 14/10/2021
 // -----------------------------------------------------------------
 
-import mapControl from "./mapControl.js";
 // "http://localhost:3000/" Por defecto
 const url = new URL("http://localhost:8000/")
 
-let botonMedidas = document.getElementById("botonMedidas");
-botonMedidas.addEventListener("click", obtenerTodasLasMedidas, false);
-
-// --------------------------------------------------------------
-//#region get
-// --------------------------------------------------------------
 /**
  * obtenerTodasLasMedidas() -> JSON de las medidas
  * Recibe las medidas de la base de datos
- *
+ * 
  * 
  */
-async function obtenerTodasLasMedidas() {
+async function obtenerTodasLasMediciones() {
 
-  fetch(url + `medidas`, {method: 'get'})
+  fetch(url + `mediciones`, {method: 'get'})
   .then(response => {
       if (response.ok) {
         response.json()
         .then(json => {
-          mapControl.addMarkers(json);
-          return json;
+          console.log(JSON.stringify(json));
+          return JSON.stringify(json);
         });
         
       } else {
@@ -37,29 +30,4 @@ async function obtenerTodasLasMedidas() {
     });
 }
 
-/**
- * obtenerUltimaMedida() -> JSON con la medida
- * Recibe la ultima medida de la base de datos
- *
- * 
- */
- async function obtenerUltimaMedida() {
-
-  fetch(url + `medida/ultima`, {method: 'get'})
-  .then(response => {
-      if (response.ok) {
-        response.json()
-        .then(json => {
-          mapControl.addMarkers(json);
-          return json;
-        });
-        
-      } else {
-        document.getElementById("cuerpo").innerHTML = "Error 404";
-      }
-    });
-}
-
-//#endregion
-
-export default obtenerTodasLasMedidas;
+export {obtenerTodasLasMediciones};
