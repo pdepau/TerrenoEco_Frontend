@@ -57,7 +57,7 @@
     height: 95%;
 }
 
-.imagenes-medallas {}
+
 
 .imagenes-medallas img {
     margin: 0 auto;
@@ -259,9 +259,12 @@ td:last-child {
     color: #820053;
 }
 
+.imagenes-medallas {}
+
 .medallas-fila {
     display: flex;
     justify-content: space-around;
+    flex-wrap: wrap;
     width: 500px;
 }
 

@@ -83,8 +83,17 @@
 
 
 <script>
+    var aux = 1;
+
     function burgerMenu() {
-        document.getElementById("menu-desplegable-grandote").style.display = "inherit";
+        if (aux) {
+            document.getElementById("menu-desplegable-grandote").style.display = "inherit";
+            aux = 0;
+        } else {
+            document.getElementById("menu-desplegable-grandote").style.display = "none";
+            aux = 1;
+        }
+
 
     }
 
