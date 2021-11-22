@@ -192,13 +192,13 @@
             <div class="selector">
                 <div>
                     <fieldset id="group1">
-                        <input type="radio" value="value1" name="group1"><label>Distancia</label>
+                        <input type="radio" value="value1" name="group1" checked><label>Distancia</label>
                         <input type="radio" value="value2" name="group1"><label>Puntos</label>
                     </fieldset>
                 </div>
                 <div>
                     <fieldset id="group2">
-                        <input type="radio" value="value1" name="group2"><label>Hoy</label>
+                        <input type="radio" value="value1" name="group2" checked><label>Hoy</label>
                         <input type="radio" value="value2" name="group2"><label>Semana</label>
                         <input type="radio" value="value3" name="group2"><label>Mes</label>
                         <input type="radio" value="value4" name="group2"><label>Siempre</label>

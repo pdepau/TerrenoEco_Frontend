@@ -13,7 +13,9 @@
 
 
     <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
 
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
 
 </head>
 
@@ -24,8 +26,9 @@
         <!-- UTILIZAR ESTE DIV COMO BODY-->
 
         <!-- MAPA-->
-        <div id="contenedor-mapa">
-            <img src="img/placeholder-mapa.png" alt="mapa" id="mapa">
+        <div id="map">
+            <!--imagen mapa placeholder-->
+            <!--<img src="img/placeholder-mapa.png" alt="mapa" id="mapa-img">-->
         </div>
 
         <!-- AQUI TERMINA EL MAPA-->
@@ -42,6 +45,10 @@
 
 
     </div>
+
+
+
+    <script src=js/mapa.js></script>
 </body>
 
 </html>
