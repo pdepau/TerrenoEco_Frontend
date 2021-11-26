@@ -188,71 +188,72 @@
             </div>
         </section>
         <section id="ranking">
+            <div class="rb-box">
 
-            <div class="selector">
-                <div>
-                    <fieldset id="group1">
-                        <input type="radio" value="value1" name="group1" checked><label>Distancia</label>
-                        <input type="radio" value="value2" name="group1"><label>Puntos</label>
-                    </fieldset>
+                <div class="selector">
+                    <div>
+                        <fieldset id="group1">
+                            <input type="radio" value="value1" name="group1" checked><label>Distancia</label>
+                            <input type="radio" value="value2" name="group1"><label>Puntos</label>
+                        </fieldset>
+                    </div>
+                    <div>
+                        <fieldset id="group2">
+                            <input type="radio" value="value1" name="group2" checked><label>Hoy</label>
+                            <input type="radio" value="value2" name="group2"><label>Semana</label>
+                            <input type="radio" value="value3" name="group2"><label>Mes</label>
+                            <input type="radio" value="value4" name="group2"><label>Siempre</label>
+                        </fieldset>
+                    </div>
                 </div>
-                <div>
-                    <fieldset id="group2">
-                        <input type="radio" value="value1" name="group2" checked><label>Hoy</label>
-                        <input type="radio" value="value2" name="group2"><label>Semana</label>
-                        <input type="radio" value="value3" name="group2"><label>Mes</label>
-                        <input type="radio" value="value4" name="group2"><label>Siempre</label>
-                    </fieldset>
-                </div>
-            </div>
 
 
-            <table class="styled-table">
-                <tbody>
-                    <tr>
-                        <td><img src="img/profile-default.png" alt=""></td>
-                        <td class="td-posicion">#1</td>
-                        <td>Nombre de usuario</td>
-                        <td>34.23 Km </td>
-                    </tr>
-                    <tr>
-                        <td><img src="img/profile-default.png" alt=""></td>
-                        <td class="td-posicion">#1</td>
-                        <td>Nombre de usuario</td>
-                        <td>34.23 Km </td>
-                    </tr>
-                    <tr>
-                        <td><img src="img/profile-default.png" alt=""></td>
-                        <td class="td-posicion">#1</td>
-                        <td>Nombre de usuario</td>
-                        <td>34.23 Km </td>
-                    </tr>
-                    <tr>
-                        <td><img src="img/profile-default.png" alt=""></td>
-                        <td class="td-posicion">#1</td>
-                        <td>Nombre de usuario</td>
-                        <td>34.23 Km </td>
-                    </tr>
-                    <tr>
-                        <td><img src="img/profile-default.png" alt=""></td>
-                        <td class="td-posicion">#1</td>
-                        <td>Nombre de usuario</td>
-                        <td>34.23 Km </td>
-                    </tr>
-                    <tr>
-                        <td><img src="img/profile-default.png" alt=""></td>
-                        <td class="td-posicion">#1</td>
-                        <td>Nombre de usuario</td>
-                        <td>34.23 Km </td>
-                    </tr>
-                    <tr>
-                        <td><img src="img/profile-default.png" alt=""></td>
-                        <td class="td-posicion">#1</td>
-                        <td>Nombre de usuario</td>
-                        <td>34.23 Km </td>
-                    </tr>
-                </tbody>
-            </table>
+                <table class="styled-table">
+                    <tbody>
+                        <tr>
+                            <td><img src="img/profile-default.png" alt=""></td>
+                            <td class="td-posicion">#1</td>
+                            <td>Nombre de usuario</td>
+                            <td>34.23 Km </td>
+                        </tr>
+                        <tr>
+                            <td><img src="img/profile-default.png" alt=""></td>
+                            <td class="td-posicion">#1</td>
+                            <td>Nombre de usuario</td>
+                            <td>34.23 Km </td>
+                        </tr>
+                        <tr>
+                            <td><img src="img/profile-default.png" alt=""></td>
+                            <td class="td-posicion">#1</td>
+                            <td>Nombre de usuario</td>
+                            <td>34.23 Km </td>
+                        </tr>
+                        <tr>
+                            <td><img src="img/profile-default.png" alt=""></td>
+                            <td class="td-posicion">#1</td>
+                            <td>Nombre de usuario</td>
+                            <td>34.23 Km </td>
+                        </tr>
+                        <tr>
+                            <td><img src="img/profile-default.png" alt=""></td>
+                            <td class="td-posicion">#1</td>
+                            <td>Nombre de usuario</td>
+                            <td>34.23 Km </td>
+                        </tr>
+                        <tr>
+                            <td><img src="img/profile-default.png" alt=""></td>
+                            <td class="td-posicion">#1</td>
+                            <td>Nombre de usuario</td>
+                            <td>34.23 Km </td>
+                        </tr>
+                        <tr>
+                            <td><img src="img/profile-default.png" alt=""></td>
+                            <td class="td-posicion">#1</td>
+                            <td>Nombre de usuario</td>
+                            <td>34.23 Km </td>
+                        </tr>
+                    </tbody>
+                </table>
 
         </section>
 
