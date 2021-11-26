@@ -32,7 +32,7 @@
 
         <!-- AQUI TERMINA EL MAPA-->
 
-        <div id="leyenda">
+        <div id="leyenda" class="expandido">
             <h1>Leyenda</h1>
             <div class="leyenda-valor leyenda-alto">Alto</div>
             <div class="leyenda-valor leyenda-medio">Medio</div>
