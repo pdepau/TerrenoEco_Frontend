@@ -39,18 +39,18 @@
         <!-- AQUI TERMINA EL MAPA-->
 
         <div id="switch">
-            <button id="switchB1" onclick='selectorCambiado(1)'>CO2</button>
+            <button id="switchB1" onclick='selectorCambiado(1)'>CO</button>
 
-            <button id="switchB2" onclick='selectorCambiado(2)'>CO</buttona>
+            <button id="switchB2" onclick='selectorCambiado(2)'>CO2</buttona>
 
             <button id="switchB3" onclick='selectorCambiado(3)'>O3</button>
         </div>
 
         <div id="leyenda">
             <h1>Leyenda</h1>
-            <div class="leyenda-valor leyenda-alto">Alto</div>
-            <div class="leyenda-valor leyenda-medio">Medio</div>
-            <div class="leyenda-valor leyenda-bajo">Bajo</div>
+            <div id="leyendaAlto" class="leyenda-valor leyenda-alto">Alto</div>
+            <div id="leyendaMedio" class="leyenda-valor leyenda-medio">Medio</div>
+            <div id="leyendaBajo" class="leyenda-valor leyenda-bajo">Bajo</div>
             <div class="leyenda-valor leyenda-sin-registro">Sin registro</div>
             <div class="ecoparada-leyenda"><img src="img/Ecoparada.png" alt="ecoparada" id="ecoparada-img">Ecoparada</div>
         </div>

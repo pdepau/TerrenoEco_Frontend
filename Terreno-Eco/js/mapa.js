@@ -1,3 +1,9 @@
+// -------------------------------------------------------------
+// Autores: Adrián Maldonado, Luis Belloch
+// Descripción: Funciones y configuracion del mapa leaflet
+// Fecha: 20/11/2021
+// -------------------------------------------------------------
+
 //Layer para el mapa persé
 //No hace falta tocar nada, a menos que se quiera cambiar el estilo
 var baseLayer = L.tileLayer(
@@ -229,24 +235,41 @@ function selectorCambiado(tipo) {
   switch (true) {
     case (tipo == 1 && tipoSeleccionado != 1):
       // CO2
-      console.debug("CO2 seleccionado")
+      console.debug("CO seleccionado")
       tipoSeleccionado = 1;
-      // TODO: crear el mapa de calor con CO2
+      obtenerTipo(tipoSeleccionado, actualizarLeyenda);
       break;
   
     case (tipo == 2 && tipoSeleccionado != 2):
       // CO
-      console.debug("CO seleccionado")
+      console.debug("CO2 seleccionado")
       tipoSeleccionado = 2;
-      // TODO: crea el mapa de calor con CO
+      obtenerTipo(tipoSeleccionado, actualizarLeyenda);
       break;
     case (tipo == 3 && tipoSeleccionado != 3):
       // O3
       console.debug("O3 seleccionado")
       tipoSeleccionado = 3;
-      // TODO: crea el mapa de calor con O3 
+      obtenerTipo(tipoSeleccionado, actualizarLeyenda);
       break;
     default:
       break;
   }
+}
+
+/**
+ * Actualiza la leyenda para el nuevo contaminante seleccionado
+ * 
+ * @param {tipo} tipo recibido
+ */
+function actualizarLeyenda(tipo) {
+  const tipoJson = JSON.parse(tipo);
+
+  const leyendaAlto = document.getElementById('leyendaAlto');
+  const leyendaMedio = document.getElementById('leyendaMedio');
+  const leyendaBajo = document.getElementById('leyendaBajo');
+
+  leyendaBajo.innerHTML = tipoJson[0].riesgo_leve;
+  leyendaMedio.innerHTML = tipoJson[0].riesgo_medio;
+  leyendaAlto.innerHTML = tipoJson[0].riesgo_alto;
 }

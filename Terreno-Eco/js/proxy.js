@@ -26,6 +26,14 @@ async function obtenerTodasLasMediciones(cb) {
   });
 }
 
+/**
+ * data:json =>
+ *      obtenerMedicionesAcotadas()
+ * Medidas:[medida] <=
+ * 
+ * @param {json} data para acotar las medidas
+ * @param {callback} cb 
+ */
 async function obtenerMedicionesAcotadas(data, cb) {
   fetch(url + `mediciones/acotadas`, {
     method: "POST",
@@ -44,6 +52,16 @@ async function obtenerMedicionesAcotadas(data, cb) {
   });
 }
 
+/**
+ * mediciones:[medicion],
+ * factor:Z =>
+ *      interpolarMediciones()
+ * mediciones:[medicion] <=
+ * 
+ * @param {[medicion]} mediciones de base
+ * @param {number} factor para crear nuevas mediciones
+ * @returns lista de medidas interpoladas
+ */
 function interpolarMediciones(mediciones, factor) {
   let interpolados = [];
   let points = [];
@@ -128,4 +146,24 @@ function interpolarMediciones(mediciones, factor) {
   } // for i
 
   return interpolados;
+} // ()
+
+/**
+ * id:Z =>
+ *      obtenerTipo()
+ * Tipo:Tipo <=
+ * 
+ * @param {number} id del tipo a tomar de la base de datos
+ * @param {callback} cb donde se recibe la respuesta
+ */
+function obtenerTipo(id, cb) {
+  fetch(url + `tipo` + '/' + id, { method: "get" }).then((response) => {
+    if (response.ok) {
+      response.json().then((json) => {
+        return cb(JSON.stringify(json));
+      });
+    } else {
+      document.getElementById("cuerpo").innerHTML = "Error 404";
+    }
+  });
 }
