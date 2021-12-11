@@ -96,6 +96,9 @@ async function f1(x) {
 let fechaMax = 1637868163754; //new Date().getTime()
 let fechaMin = fechaMax - 3600000;
 
+
+// Ultimo tipo seleccionado en los botones
+var tipoSeleccionado = 2;
 //Objeto para la interpolación con los datos
 let datos = {
   latMax: bounds._northEast.lat,
@@ -104,7 +107,7 @@ let datos = {
   lonMin: bounds._southWest.lng,
   tiempoMin: fechaMin,
   tiempoMax: fechaMax,
-  tipo: 2,
+  tipo: tipoSeleccionado,
 };
 
 //Llamada a la logica con un callback
@@ -212,3 +215,38 @@ leyenda.addEventListener("click", function () {
     leyenda.classList.add("expandido");
   }
 });
+
+/**
+ * tipo:Z =>
+ *      selectorCambiado()
+ * 
+ * Se llama cuando se cambia el tipo de concentracion a mostrar en el mapa. Cuando se
+ * ejecuta llama la base de datos y asigna los valores de concentracion correspondientes
+ * 
+ * @param {number} tipo numerico dependiendo del valor
+ */
+function selectorCambiado(tipo) {
+  switch (true) {
+    case (tipo == 1 && tipoSeleccionado != 1):
+      // CO2
+      console.debug("CO2 seleccionado")
+      tipoSeleccionado = 1;
+      // TODO: crear el mapa de calor con CO2
+      break;
+  
+    case (tipo == 2 && tipoSeleccionado != 2):
+      // CO
+      console.debug("CO seleccionado")
+      tipoSeleccionado = 2;
+      // TODO: crea el mapa de calor con CO
+      break;
+    case (tipo == 3 && tipoSeleccionado != 3):
+      // O3
+      console.debug("O3 seleccionado")
+      tipoSeleccionado = 3;
+      // TODO: crea el mapa de calor con O3 
+      break;
+    default:
+      break;
+  }
+}

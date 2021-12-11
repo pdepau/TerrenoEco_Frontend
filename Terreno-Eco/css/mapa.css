@@ -15,6 +15,22 @@
     width: 100%;
 }
 
+#switch {
+    padding: 10px;
+    height: 2rem;
+    width: 200px;
+    z-index: 5000;
+    position: fixed;
+    top: 5rem;
+    right: 0;
+    /*border: 1px solid black;*/
+    background-color: white;
+    margin-bottom: 25px;
+    margin-right: 25px;
+    border-radius: 20px;
+    text-align: center;
+}
+
 #leyenda {
     padding: 10px;
     height: 230px;
@@ -64,3 +80,4 @@
     display: flex;
     align-items: center;
 }
+
