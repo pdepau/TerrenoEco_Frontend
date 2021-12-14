@@ -178,16 +178,17 @@ var EcoParadaMarker = L.icon({
   popupAnchor: [0, -10], // point from which the popup should open relative to the iconAnchor
 });
 
-//Poner el icono en el mapa
-var marker = L.marker([38.996852, -0.165307], {
+// TEMPORAL
+// --------------
+// Poner el icono en el mapa (marcador)
+var marker = L.marker([38.5804, -0.1127], {
   icon: EcoParadaMarker,
 }).addTo(map);
-
 //Formateo del popup
 marker.bindPopup(
   "<b>¡ECOPARADA!</b><br>Gandia<br><br>  <table><tr><th>SO2</th><th> </th><th>NO2</th><th> </th><th>CO</th><th> </th><th>O3</th></tr><tr><td>μg/m3</td><td> </td><td> μg/Nm3</td><td> </td><td>mg/m3</td><td> </td><td> μgr/m3</td></tr><tr><td>255</td><td> </td><td>10</td><td> </td><td>143</td><td> </td><td>76</td></tr></table> "
 );
-
+// --------------
 
 //Obtiene la leyenda
 let leyenda = document.getElementById("leyenda");
