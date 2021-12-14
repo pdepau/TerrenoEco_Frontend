@@ -104,7 +104,7 @@ let fechaMin = fechaMax - 3600000;
 
 
 // Ultimo tipo seleccionado en los botones
-var tipoSeleccionado = 2;
+var tipoSeleccionado = 1;
 //Objeto para la interpolación con los datos
 let datos = {
   latMax: bounds._northEast.lat,
@@ -231,7 +231,15 @@ leyenda.addEventListener("click", function () {
  * 
  * @param {number} tipo numerico dependiendo del valor
  */
-function selectorCambiado(tipo) {
+function selectorCambiado(tipo, botonPulsado) {
+  // busca el boton activado 
+  let selectedButtons = document.getElementsByClassName("selected");
+  // quita la clase al boton activado
+  for(let button of selectedButtons) {
+    button.classList.remove('selected');
+  } // for
+  // activamos el boton que se haya pulsado
+  botonPulsado.classList.add('selected');
   switch (true) {
     case (tipo == 1 && tipoSeleccionado != 1):
       // CO2
@@ -239,7 +247,6 @@ function selectorCambiado(tipo) {
       tipoSeleccionado = 1;
       obtenerTipo(tipoSeleccionado, actualizarLeyenda);
       break;
-  
     case (tipo == 2 && tipoSeleccionado != 2):
       // CO
       console.debug("CO2 seleccionado")
@@ -258,6 +265,9 @@ function selectorCambiado(tipo) {
 }
 
 /**
+ * tipo:Json =>
+ *      actualizarLeyenda()
+ * 
  * Actualiza la leyenda para el nuevo contaminante seleccionado
  * 
  * @param {tipo} tipo recibido
