@@ -15,12 +15,12 @@
     <script src="https://kit.fontawesome.com/a81368914c.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
-    
+
 </head>
 
 <body>
 
-<?php include_once 'header-menu.php' ?>
+    <?php include_once 'header-menu.php' ?>
     <div id="contenedor">
         <!-- UTILIZAR ESTE DIV COMO BODY-->
 
@@ -30,11 +30,7 @@
             <!--<img src="img/placeholder-mapa.png" alt="mapa" id="mapa-img">-->
         </div>
 
-        <script src="js/heatmap.min.js"></script>
-        <script src="js/leaflet-heatmap.js"></script>
-        <script src="js/Punto.js"></script>
-        <script src="js/proxy.js"></script>
-        <script src=js/mapa.js></script>
+
 
         <!-- AQUI TERMINA EL MAPA-->
 
@@ -47,7 +43,7 @@
 
         </div>
 
-        <div id="leyenda">
+        <div id="leyenda" class="expandido">
             <h1>Leyenda</h1>
             <div id="leyendaAlto" class="leyenda-valor leyenda-alto">Alto</div>
             <div id="leyendaMedio" class="leyenda-valor leyenda-medio">Medio</div>
@@ -57,9 +53,14 @@
         </div>
 
 
-
     </div>
 
 </body>
+
+<script src="js/heatmap.min.js"></script>
+<script src="js/leaflet-heatmap.js"></script>
+<script src="js/Punto.js"></script>
+<script src="js/proxy.js"></script>
+<script src=js/mapa.js></script>
 
 </html>
