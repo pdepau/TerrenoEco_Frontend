@@ -33,7 +33,7 @@
         <!-- AQUI TERMINA EL MAPA-->
 
 
-        <div id="switch">
+        <div id="switch" style="top: 2%;right: 2%">
             <button id="switchB1" onclick='selectorCambiado(1)'>CO</button>
 
             <button id="switchB2" onclick='selectorCambiado(2)'>CO2</buttona>

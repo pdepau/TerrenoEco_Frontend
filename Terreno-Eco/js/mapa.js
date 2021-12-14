@@ -74,25 +74,26 @@ function crearDivPopoup(so2, no2, co, o3, cerca) {
       co +
       "," +
       o3 +
-      ')">Holi</button>';
+      ')" class="botonRecompensa">OBTENER RECOMPENSA</button>';
   }
 
   return div;
 }
 
-//Poner el icono en el mapa
+//Markers de ejemplo
 var marker1 = L.marker([38.997852, -0.164307], {
   icon: EcoParadaMarker,
 }).bindPopup(crearDivPopoup(12, 13, 14, 15, false));
 var marker2 = L.marker([38.997852, -0.165307], {
   icon: EcoParadaMarker,
-}).bindPopup(crearDivPopoup(12, 13, 14, 15, false));
+}).bindPopup(crearDivPopoup(12, 17, 14, 15, false));
 var marker3 = L.marker([38.996852, -0.165307], {
   icon: EcoParadaMarker,
-}).bindPopup(crearDivPopoup(12, 13, 14, 15, false));
+}).bindPopup(crearDivPopoup(12, 19, 14, 15, false));
 var marker4 = L.marker([38.996852, -0.164307], {
   icon: EcoParadaMarker,
-}).bindPopup(crearDivPopoup(12, 13, 14, 15, true));
+}).bindPopup(crearDivPopoup(12, 10, 14, 15, false));
+
 
 var ecoparadas = [marker1, marker2, marker3, marker4];
 var ecoparadasMapa = L.layerGroup(ecoparadas);
@@ -230,7 +231,7 @@ map.on("moveend", function (ev) {
 });
 
 var MarkerUbicacion = L.icon({
-  iconUrl: "img/profile-default.png",
+  iconUrl: "img/ubicador.svg",
   //shadowUrl: 'img/Ecoparada.png',
   iconSize: [20, 20], // size of the icon
   //shadowSize: [50, 64], // size of the shadow
@@ -238,8 +239,8 @@ var MarkerUbicacion = L.icon({
   //shadowAnchor: [4, 62], // the same for the shadow
 });
 
+//Centrar el mapa en la ubicación proporcionada por el navegador
 map.locate({ setView: true, maxZoom: 16 });
-
 function onLocationFound(e) {
   var radius = e.accuracy / 2;
 
@@ -247,7 +248,7 @@ function onLocationFound(e) {
 
   L.circle(e.latlng, radius).addTo(map);
 
-  actualizarPopupMarkers(e.latlng.lat, e.latlng.lng);
+  //actualizarPopupMarkers(e.latlng.lat, e.latlng.lng);
 }
 function onLocationError(e) {
   alert(e.message);
@@ -349,7 +350,14 @@ function actualizarLeyenda(tipo) {
   leyendaAlto.innerHTML = tipoJson[0].riesgo_alto;
 }
 
+//Ubicacion para acceder a ella en global
 var ubicacion;
+/**
+ * Centra el mapa en la posicion proporcionada
+ * 
+ * @param {long} lat 
+ * @param {long} lon 
+ */
 function centrarMapaEnUbicacion(lat, lon) {
   if (ubicacion != null) {
     map.removeLayer(ubicacion);
@@ -367,6 +375,12 @@ function centrarMapaEnUbicacion(lat, lon) {
   actualizarPopupMarkers(lat, lon);
 }
 
+/**
+ * Actualiza los markers para que tengan el boton de calibración según la distancia
+ * 
+ * @param {long} lat 
+ * @param {long} lon 
+ */
 function actualizarPopupMarkers(lat, lon) {
   ecoparadas.forEach((ecoparada) => {
     let distancia = Math.sqrt(
@@ -374,12 +388,22 @@ function actualizarPopupMarkers(lat, lon) {
         Math.pow(lon - ecoparada._latlng.lng, 2)
     );
 
-    if (distancia < 1) {
+      let distanciaEnMetros=distancia*111110;
+
+    if (distanciaEnMetros < 200) {
       ecoparada.bindPopup(crearDivPopoup(12, 13, 14, 15, true));
     }
   });
 }
 
+/**
+ * Envia los valores de la Ecoparada al console para leerlos desde Android
+ * 
+ * @param {int} so2 
+ * @param {int} no2 
+ * @param {int} co 
+ * @param {int} o3 
+ */
 function enviarValoresConsola(so2, no2, co, o3) {
   console.log("DatosEcoparada," + so2 + "," + no2 + "," + co + "," + o3);
 }

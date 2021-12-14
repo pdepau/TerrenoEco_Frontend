@@ -25,12 +25,11 @@ Leyenda
     width: 200px;
     z-index: 5000;
     position: fixed;
-    top: 2.5rem;
-    right: 0;
+    top: 10%;
+    right: 5%;
     /*border: 1px solid black;*/
     background-color: white;
     margin-bottom: 25px;
-    margin-right: 25px;
     border-radius: 20px;
     text-align: center;
     /* flex */
@@ -123,3 +122,12 @@ Fin leyenda
     align-items: center;
 }
 
+.botonRecompensa{
+    border-radius: 8px;
+    background-color: #820053;
+    color: white;
+    border: none;
+    padding: 8px;
+    width: 100%;
+    margin-top: 8px;
+}
