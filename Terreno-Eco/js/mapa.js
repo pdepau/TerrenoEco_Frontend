@@ -38,11 +38,71 @@ var cfg = {
 //Layer para el mapa de calor, hasta aquí esta todo como en la api
 var heatmapLayer = new HeatmapOverlay(cfg);
 
+//Estilo para el icono
+var EcoParadaMarker = L.icon({
+  iconUrl: "img/Ecoparada.png",
+  //shadowUrl: 'img/Ecoparada.png',
+  iconSize: [50, 50], // size of the icon
+  //shadowSize: [50, 64], // size of the shadow
+  iconAnchor: [25, 25], // point of the icon which will correspond to marker's location
+  //shadowAnchor: [4, 62], // the same for the shadow
+  popupAnchor: [0, -10], // point from which the popup should open relative to the iconAnchor
+});
+
+function crearDivPopoup(so2, no2, co, o3, cerca) {
+  let div =
+    "<b>¡ECOPARADA!</b>" +
+    "<br>Gandia<br><br>" +
+    "<table><tr><th>SO2</th><th></th><th>NO2</th><th></th><th>CO</th><th></th><th>O3</th></tr>" +
+    "<tr><td>μg/m3</td><td></td><td> μg/Nm3</td><td></td><td>mg/m3</td><td></td><td> μgr/m3</td></tr>" +
+    "<tr><td>" +
+    so2 +
+    "</td><td></td><td>" +
+    no2 +
+    "</td><td></td><td>" +
+    co +
+    "</td><td></td><td>" +
+    o3 +
+    "</td></tr></table>";
+  if (cerca) {
+    div +=
+      '<button onclick="enviarValoresConsola(' +
+      so2 +
+      "," +
+      no2 +
+      "," +
+      co +
+      "," +
+      o3 +
+      ')" class="botonRecompensa">OBTENER RECOMPENSA</button>';
+  }
+
+  return div;
+}
+
+//Markers de ejemplo
+var marker1 = L.marker([38.997852, -0.164307], {
+  icon: EcoParadaMarker,
+}).bindPopup(crearDivPopoup(12, 13, 14, 15, false));
+var marker2 = L.marker([38.997852, -0.165307], {
+  icon: EcoParadaMarker,
+}).bindPopup(crearDivPopoup(12, 17, 14, 15, false));
+var marker3 = L.marker([38.996852, -0.165307], {
+  icon: EcoParadaMarker,
+}).bindPopup(crearDivPopoup(12, 19, 14, 15, false));
+var marker4 = L.marker([38.996852, -0.164307], {
+  icon: EcoParadaMarker,
+}).bindPopup(crearDivPopoup(12, 10, 14, 15, false));
+
+
+var ecoparadas = [marker1, marker2, marker3, marker4];
+var ecoparadasMapa = L.layerGroup(ecoparadas);
+
 //Creación del mapa en el div con id = "map"
 var map = new L.Map("map", {
   center: new L.LatLng(38.996852, -0.165307),
   zoom: 13,
-  layers: [baseLayer, heatmapLayer],
+  layers: [baseLayer, heatmapLayer, ecoparadasMapa],
 });
 
 //Margenes del mapa en el html
@@ -52,19 +112,23 @@ let bounds = map.getBounds();
 //Funcion que se llama al recibir los datos del servidor
 //Ahora mismo utiliza las medidas acotadas simplemente
 //TODO : Hacer que haga la interpolación y utilice esos datos
-async function f1(x) {
+async function callbackDatosRecibidos(x) {
   x = JSON.parse(x);
 
   //Valores para hacer la cuadricula
   //Miran el rango de las latitudes y lo dividen en partes
-  let delta = Math.abs(bounds._southWest.lng - bounds._northEast.lng) / 25;
-  let deltaY = Math.abs((bounds._southWest.lat - bounds._northEast.lat) / 25);
+  let delta = Math.abs(bounds._southWest.lng - bounds._northEast.lng) / 110;
+  let deltaY = Math.abs((bounds._southWest.lat - bounds._northEast.lat) / 110);
 
   let puntos = [];
 
   //Crea la cuadricula de puntos con lat y lon
   for (let a = bounds._southWest.lng; a < bounds._northEast.lng; a += delta) {
-    for (let b = bounds._southWest.lat; b < bounds._northEast.lat; b += deltaY) {
+    for (
+      let b = bounds._southWest.lat;
+      b < bounds._northEast.lat;
+      b += deltaY
+    ) {
       puntos.push({
         latMax: b + deltaY,
         latMin: b,
@@ -102,7 +166,6 @@ async function f1(x) {
 let fechaMax = 1637868163754; //new Date().getTime()
 let fechaMin = fechaMax - 3600000;
 
-
 // Ultimo tipo seleccionado en los botones
 var tipoSeleccionado = 1;
 //Objeto para la interpolación con los datos
@@ -118,11 +181,11 @@ let datos = {
 
 //Llamada a la logica con un callback
 //
-obtenerMedicionesAcotadas(datos, f1);
+obtenerMedicionesAcotadas(datos, callbackDatosRecibidos);
 
 //Pasa la lista de medidas formateadas por region a puntos para el mapa
 function medidasAgeoson(medidas) {
-  console.log(medidas);
+  //console.log(medidas);
   let puntos = [];
   medidas.forEach((element) => {
     puntos.push({
@@ -147,7 +210,7 @@ function llenarMapa(puntos) {
 //Se llama cada vez que se mueve el mapa
 map.on("moveend", function (ev) {
   //Vuelve a obtener los margenes tras mover el mapa
-  let bounds = map.getBounds();
+  bounds = map.getBounds();
 
   //Vuelve a obtener la fecha
   let fechaMax = 1637868163754; //new Date().getTime()
@@ -164,31 +227,34 @@ map.on("moveend", function (ev) {
     tipo: 2,
   };
 
-  obtenerMedicionesAcotadas(datos, f1);
+  obtenerMedicionesAcotadas(datos, callbackDatosRecibidos);
 });
 
-//Estilo para el icono
-var EcoParadaMarker = L.icon({
-  iconUrl: "img/Ecoparada.png",
+var MarkerUbicacion = L.icon({
+  iconUrl: "img/ubicador.svg",
   //shadowUrl: 'img/Ecoparada.png',
-  iconSize: [50, 50], // size of the icon
+  iconSize: [20, 20], // size of the icon
   //shadowSize: [50, 64], // size of the shadow
   iconAnchor: [25, 25], // point of the icon which will correspond to marker's location
   //shadowAnchor: [4, 62], // the same for the shadow
-  popupAnchor: [0, -10], // point from which the popup should open relative to the iconAnchor
 });
 
-// TEMPORAL
-// --------------
-// Poner el icono en el mapa (marcador)
-var marker = L.marker([38.5804, -0.1127], {
-  icon: EcoParadaMarker,
-}).addTo(map);
-//Formateo del popup
-marker.bindPopup(
-  "<b>¡ECOPARADA!</b><br>Gandia<br><br>  <table><tr><th>SO2</th><th> </th><th>NO2</th><th> </th><th>CO</th><th> </th><th>O3</th></tr><tr><td>μg/m3</td><td> </td><td> μg/Nm3</td><td> </td><td>mg/m3</td><td> </td><td> μgr/m3</td></tr><tr><td>255</td><td> </td><td>10</td><td> </td><td>143</td><td> </td><td>76</td></tr></table> "
-);
-// --------------
+//Centrar el mapa en la ubicación proporcionada por el navegador
+map.locate({ setView: true, maxZoom: 16 });
+function onLocationFound(e) {
+  var radius = e.accuracy / 2;
+
+  L.marker(e.latlng).addTo(map);
+
+  L.circle(e.latlng, radius).addTo(map);
+
+  //actualizarPopupMarkers(e.latlng.lat, e.latlng.lng);
+}
+function onLocationError(e) {
+  alert(e.message);
+}
+map.on("locationfound", onLocationFound);
+map.on("locationerror", onLocationError);
 
 //Obtiene la leyenda
 let leyenda = document.getElementById("leyenda");
@@ -201,9 +267,8 @@ leyenda.addEventListener("click", function () {
     let divEco = Array.from(
       document.getElementsByClassName("ecoparada-leyenda")
     )[0];
-    console.log(divEco);
     divs.forEach((element) => {
-      console.log((element.style.display = "none"));
+      element.style.display = "none";
     });
     divEco.style.display = "none";
     leyenda.style.height = "60px";
@@ -214,9 +279,8 @@ leyenda.addEventListener("click", function () {
     let divEco = Array.from(
       document.getElementsByClassName("ecoparada-leyenda")
     )[0];
-    console.log(divEco);
     divs.forEach((element) => {
-      console.log((element.style.display = "inherit"));
+      element.style.display = "inherit";
     });
     divEco.style.display = "inherit";
     leyenda.classList.add("expandido");
@@ -226,10 +290,10 @@ leyenda.addEventListener("click", function () {
 /**
  * tipo:Z =>
  *      selectorCambiado()
- * 
+ *
  * Se llama cuando se cambia el tipo de concentracion a mostrar en el mapa. Cuando se
  * ejecuta llama la base de datos y asigna los valores de concentracion correspondientes
- * 
+ *
  * @param {number} tipo numerico dependiendo del valor
  */
 function selectorCambiado(tipo, botonPulsado) {
@@ -242,21 +306,22 @@ function selectorCambiado(tipo, botonPulsado) {
   // activamos el boton que se haya pulsado
   botonPulsado.classList.add('selected');
   switch (true) {
-    case (tipo == 1 && tipoSeleccionado != 1):
+    case tipo == 1 && tipoSeleccionado != 1:
       // CO2
-      console.debug("CO seleccionado")
+      console.debug("CO seleccionado");
       tipoSeleccionado = 1;
       obtenerTipo(tipoSeleccionado, actualizarLeyenda);
       break;
-    case (tipo == 2 && tipoSeleccionado != 2):
+
+    case tipo == 2 && tipoSeleccionado != 2:
       // CO
-      console.debug("CO2 seleccionado")
+      console.debug("CO2 seleccionado");
       tipoSeleccionado = 2;
       obtenerTipo(tipoSeleccionado, actualizarLeyenda);
       break;
-    case (tipo == 3 && tipoSeleccionado != 3):
+    case tipo == 3 && tipoSeleccionado != 3:
       // O3
-      console.debug("O3 seleccionado")
+      console.debug("O3 seleccionado");
       tipoSeleccionado = 3;
       obtenerTipo(tipoSeleccionado, actualizarLeyenda);
       break;
@@ -270,17 +335,75 @@ function selectorCambiado(tipo, botonPulsado) {
  *      actualizarLeyenda()
  * 
  * Actualiza la leyenda para el nuevo contaminante seleccionado
- * 
+ *
  * @param {tipo} tipo recibido
  */
 function actualizarLeyenda(tipo) {
   const tipoJson = JSON.parse(tipo);
 
-  const leyendaAlto = document.getElementById('leyendaAlto');
-  const leyendaMedio = document.getElementById('leyendaMedio');
-  const leyendaBajo = document.getElementById('leyendaBajo');
+  const leyendaAlto = document.getElementById("leyendaAlto");
+  const leyendaMedio = document.getElementById("leyendaMedio");
+  const leyendaBajo = document.getElementById("leyendaBajo");
 
   leyendaBajo.innerHTML = tipoJson[0].riesgo_leve;
   leyendaMedio.innerHTML = tipoJson[0].riesgo_medio;
   leyendaAlto.innerHTML = tipoJson[0].riesgo_alto;
+}
+
+//Ubicacion para acceder a ella en global
+var ubicacion;
+/**
+ * Centra el mapa en la posicion proporcionada
+ * 
+ * @param {long} lat 
+ * @param {long} lon 
+ */
+function centrarMapaEnUbicacion(lat, lon) {
+  if (ubicacion != null) {
+    map.removeLayer(ubicacion);
+  }
+
+  ubicacion = L.marker([lat, lon], {
+    icon: MarkerUbicacion,
+  });
+
+  map.addLayer(ubicacion);
+
+  map.panTo(new L.LatLng(lat, lon));
+  //Formateo del popup
+
+  actualizarPopupMarkers(lat, lon);
+}
+
+/**
+ * Actualiza los markers para que tengan el boton de calibración según la distancia
+ * 
+ * @param {long} lat 
+ * @param {long} lon 
+ */
+function actualizarPopupMarkers(lat, lon) {
+  ecoparadas.forEach((ecoparada) => {
+    let distancia = Math.sqrt(
+      Math.pow(lat - ecoparada._latlng.lat, 2) +
+        Math.pow(lon - ecoparada._latlng.lng, 2)
+    );
+
+      let distanciaEnMetros=distancia*111110;
+
+    if (distanciaEnMetros < 200) {
+      ecoparada.bindPopup(crearDivPopoup(12, 13, 14, 15, true));
+    }
+  });
+}
+
+/**
+ * Envia los valores de la Ecoparada al console para leerlos desde Android
+ * 
+ * @param {int} so2 
+ * @param {int} no2 
+ * @param {int} co 
+ * @param {int} o3 
+ */
+function enviarValoresConsola(so2, no2, co, o3) {
+  console.log("DatosEcoparada," + so2 + "," + no2 + "," + co + "," + o3);
 }

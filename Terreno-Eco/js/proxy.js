@@ -35,15 +35,10 @@ async function obtenerTodasLasMediciones(cb) {
  * @param {callback} cb 
  */
 async function obtenerMedicionesAcotadas(data, cb) {
-  fetch(url + `mediciones/acotadas`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  }).then((response) => {
+  fetch(url + 'mediciones/acotadas'+'/'+data.latMax+'/'+data.latMin+'/'+data.lonMax+'/'+data.lonMin+'/'+data.tiempoMin+'/'+data.tiempoMax+'/'+data.tipo, { method: "get" }).then((response) => {
     if (response.ok) {
       response.json().then((json) => {
+        //console.log(JSON.stringify(json));
         return cb(JSON.stringify(json));
       });
     } else {
