@@ -13,7 +13,12 @@
 
 
 
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <style>
+        .nav-informacion a {
+            color: #830053;
+        }
+    </style>
     <script src="https://kit.fontawesome.com/a81368914c.js"></script>
 </head>
 

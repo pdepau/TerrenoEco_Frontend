@@ -1,4 +1,4 @@
-<?php if (!isset($path)) $path = "./"?>
+<?php if (!isset($path)) $path = "./" ?>
 
 
 <!--        HEADER  -->
@@ -6,7 +6,7 @@
     <link rel="shortcut icon" href="img/favicon.png">
 
     <a href="#" onclick="burgerMenu()"><i class="fas fa-bars"></i></a>
-    <a href="<?php echo $path?>mapa.php" class="logo"><img src="<?php echo $path?>img/logo-header.png" alt="logo"></a>
+    <a href="<?php echo $path ?>mapa.php" class="logo"><img src="<?php echo $path ?>img/logo-header.png" alt="logo"></a>
 
 </header>
 <div id="space-header"></div>
@@ -19,43 +19,30 @@
 <!--MENU SIN DESPLEGAR-->
 <nav id="menu-desplegable-chiquito">
     <ul class="lista-menu lista-menu-chiquito">
-        <li class="nav-link">
-            <a alt="mapa" href="<?php echo $path?>mapa.php"> <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#000" class="bi bi-map" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M15.817.113A.5.5 0 0 1 16 .5v14a.5.5 0 0 1-.402.49l-5 1a.502.502 0 0 1-.196 0L5.5 15.01l-4.902.98A.5.5 0 0 1 0 15.5v-14a.5.5 0 0 1 .402-.49l5-1a.5.5 0 0 1 .196 0L10.5.99l4.902-.98a.5.5 0 0 1 .415.103zM10 1.91l-4-.8v12.98l4 .8V1.91zm1 12.98 4-.8V1.11l-4 .8v12.98zm-6-.8V1.11l-4 .8v12.98l4-.8z" />
-                </svg>
-                <div class="texto-nav">Mapa</div>
+        <li class="nav-link nav-mapa">
+            <a alt="mapa" href="<?php echo $path ?>mapa.php">
+                <i class="bi bi-map"></i>
             </a>
         </li>
 
-        <li class="nav-link">
-            <a alt="clasificacion" href="<?php echo $path?>clasificacion.php" id="servicios"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#000" class="bi bi-trophy" viewBox="0 0 16 16">
-                    <path d="M2.5.5A.5.5 0 0 1 3 0h10a.5.5 0 0 1 .5.5c0 .538-.012 1.05-.034 1.536a3 3 0 1 1-1.133 5.89c-.79 1.865-1.878 2.777-2.833 3.011v2.173l1.425.356c.194.048.377.135.537.255L13.3 15.1a.5.5 0 0 1-.3.9H3a.5.5 0 0 1-.3-.9l1.838-1.379c.16-.12.343-.207.537-.255L6.5 13.11v-2.173c-.955-.234-2.043-1.146-2.833-3.012a3 3 0 1 1-1.132-5.89A33.076 33.076 0 0 1 2.5.5zm.099 2.54a2 2 0 0 0 .72 3.935c-.333-1.05-.588-2.346-.72-3.935zm10.083 3.935a2 2 0 0 0 .72-3.935c-.133 1.59-.388 2.885-.72 3.935zM3.504 1c.007.517.026 1.006.056 1.469.13 2.028.457 3.546.87 4.667C5.294 9.48 6.484 10 7 10a.5.5 0 0 1 .5.5v2.61a1 1 0 0 1-.757.97l-1.426.356a.5.5 0 0 0-.179.085L4.5 15h7l-.638-.479a.501.501 0 0 0-.18-.085l-1.425-.356a1 1 0 0 1-.757-.97V10.5A.5.5 0 0 1 9 10c.516 0 1.706-.52 2.57-2.864.413-1.12.74-2.64.87-4.667.03-.463.049-.952.056-1.469H3.504z" />
-                </svg>
-                <div class="texto-nav">Clasificacion</div>
-
-
+        <li class="nav-link nav-clasificacion">
+            <a alt="clasificacion" href="<?php echo $path ?>clasificacion.php" id="servicios">
+                <i class="bi bi-trophy"></i>
             </a>
 
         </li>
 
-        <li class="nav-link">
-            <a alt="Mis medallas" href="<?php echo $path?>misMedallas.php"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#000" class="bi bi-clipboard-data" viewBox="0 0 16 16">
-                    <path d="M4 11a1 1 0 1 1 2 0v1a1 1 0 1 1-2 0v-1zm6-4a1 1 0 1 1 2 0v5a1 1 0 1 1-2 0V7zM7 9a1 1 0 0 1 2 0v3a1 1 0 1 1-2 0V9z" />
-                    <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
-                    <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
-                </svg>
-                <div class="texto-nav">Mis medallas</div>
+        <li class="nav-link nav-datos">
+            <a alt="Mis datos" href="<?php echo $path ?>misMedallas.php">
+                <i class="bi bi-clipboard-data"></i>
 
 
             </a>
         </li>
 
-
-        <li class="nav-link">
-            <a alt="Informacion" href="<?php echo $path?>salud.php"><svg class="svg-icon" style="width: 38px; height: 38px;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1350 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M1316.571991 503.222857h-105.494505c39.103297-53.450549 60.764835-117.096088 60.764835-184.432527 0-85.138286-34.03956-165.19033-95.367033-225.437539C1049.881881-30.26989 844.237925-30.26989 717.925837 93.352791c-17.441758 16.969143-31.507692 35.918769-44.448351 56.286242-12.659341-19.804835-27.006593-38.754462-44.729671-56.286242-126.593407-123.622681-332.237363-123.622681-458.54945 0C108.589574 153.6 74.831332 233.652044 74.831332 318.79033c0 67.325187 21.661538 130.678154 60.764835 184.432527H33.758804c-18.848352 0-33.758242 15.269978-33.758241 33.938286a33.769495 33.769495 0 0 0 33.758241 33.949538h163.446154l451.797802 441.276484c1.969231 1.980484 12.096703 10.183736 23.912088 10.465055 9.846154 0 21.38022-7.348044 24.474726-10.465055l451.235164-441.276484H1316.571991c18.848352 0 33.758242-15.281231 33.758242-33.949538 0-18.668308-15.191209-33.938286-33.758242-33.938286zM216.897266 142.572308c100.430769-98.157714 263.876923-98.157714 364.307692 0 21.38022 20.93011 37.978022 43.840703 50.356044 70.149626 3.657143 7.640615 19.410989 45.821187 41.353846 45.821187 21.942857 0 38.259341-39.03578 41.353847-45.821187 0.281319-0.562637 0.562637-0.855209 0.562637-1.417846 12.940659-26.027604 28.975824-48.656879 49.793406-68.73178 100.430769-98.157714 263.876923-98.157714 364.307693 0 48.386813 47.239033 75.112088 110.029363 75.112088 176.510593 0 66.751297-26.725275 129.27156-75.112088 176.510594l-7.876923 7.640615H932.85331L866.462101 279.473231a34.129582 34.129582 0 0 0-30.101099-24.317187 33.758242 33.758242 0 0 0-33.195604 19.512264L666.725837 568.004923 587.112651 377.642198a33.66822 33.66822 0 0 0-28.975825-20.648791c-12.659341-1.125275-25.037363 5.660132-31.507692 16.687824l-76.237363 129.282813h-225.617582l-7.876923-7.651868c-48.386813-47.22778-75.112088-110.029363-75.112088-176.499341 0.281319-66.481231 26.725275-128.990242 75.112088-176.229275z m456.298901 798.832527l-378.654945-370.001582H461.925837c13.784615 0 27.850549-0.281319 37.134066-13.863385L551.385178 471.827692l82.989011 204.237363c5.063736 12.445538 14.90989 31.687736 30.663736 31.687736h0.562638c17.723077 0 25.037363-18.386989 30.663736-30.26989l131.094505-292.773978 48.105495 162.377143a33.780747 33.780747 0 0 0 32.351648 24.317187H1051.569793l-378.373626 369.990329z" fill="#2E323F" />
-                </svg>
-                <div class="texto-nav">Efectos en la salud</div>
+        <li class="nav-link nav-informacion">
+            <a alt="Informacion" href="<?php echo $path ?>salud.php">
+                <i class="bi bi-bookmark-heart"></i>
             </a>
         </li>
     </ul>
@@ -69,30 +56,30 @@
 <!--MENU DESPLEGADO-->
 <nav id="menu-desplegable-grandote">
     <ul class="lista-menu lista-menu-grandote">
-        <li class="nav-link">
-            <a alt="mapa" href="<?php echo $path?>mapa.php"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#000" class="bi bi-map" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M15.817.113A.5.5 0 0 1 16 .5v14a.5.5 0 0 1-.402.49l-5 1a.502.502 0 0 1-.196 0L5.5 15.01l-4.902.98A.5.5 0 0 1 0 15.5v-14a.5.5 0 0 1 .402-.49l5-1a.5.5 0 0 1 .196 0L10.5.99l4.902-.98a.5.5 0 0 1 .415.103zM10 1.91l-4-.8v12.98l4 .8V1.91zm1 12.98 4-.8V1.11l-4 .8v12.98zm-6-.8V1.11l-4 .8v12.98l4-.8z" />
-                </svg> Mapa</a>
+        <li class="nav-link nav-mapa">
+            <a alt="mapa" href="<?php echo $path ?>mapa.php">
+                <i class="bi bi-map"></i>
+                Mapa</a>
         </li>
 
-        <li class="nav-link">
-            <a alt="clasificacion" href="<?php echo $path?>clasificacion.php" id="servicios"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#000" class="bi bi-trophy" viewBox="0 0 16 16">
-                    <path d="M2.5.5A.5.5 0 0 1 3 0h10a.5.5 0 0 1 .5.5c0 .538-.012 1.05-.034 1.536a3 3 0 1 1-1.133 5.89c-.79 1.865-1.878 2.777-2.833 3.011v2.173l1.425.356c.194.048.377.135.537.255L13.3 15.1a.5.5 0 0 1-.3.9H3a.5.5 0 0 1-.3-.9l1.838-1.379c.16-.12.343-.207.537-.255L6.5 13.11v-2.173c-.955-.234-2.043-1.146-2.833-3.012a3 3 0 1 1-1.132-5.89A33.076 33.076 0 0 1 2.5.5zm.099 2.54a2 2 0 0 0 .72 3.935c-.333-1.05-.588-2.346-.72-3.935zm10.083 3.935a2 2 0 0 0 .72-3.935c-.133 1.59-.388 2.885-.72 3.935zM3.504 1c.007.517.026 1.006.056 1.469.13 2.028.457 3.546.87 4.667C5.294 9.48 6.484 10 7 10a.5.5 0 0 1 .5.5v2.61a1 1 0 0 1-.757.97l-1.426.356a.5.5 0 0 0-.179.085L4.5 15h7l-.638-.479a.501.501 0 0 0-.18-.085l-1.425-.356a1 1 0 0 1-.757-.97V10.5A.5.5 0 0 1 9 10c.516 0 1.706-.52 2.57-2.864.413-1.12.74-2.64.87-4.667.03-.463.049-.952.056-1.469H3.504z" />
-                </svg> Clasificacion </a>
+        <li class="nav-link nav-clasificacion">
+            <a alt="clasificacion" href="<?php echo $path ?>clasificacion.php" id="servicios">
+                <i class="bi bi-trophy"></i>
+                Clasificacion</a>
         </li>
 
-        <li class="nav-link">
-            <a alt="Mis medallas" href="<?php echo $path?>misMedallas.php"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#000" class="bi bi-clipboard-data" viewBox="0 0 16 16">
-                    <path d="M4 11a1 1 0 1 1 2 0v1a1 1 0 1 1-2 0v-1zm6-4a1 1 0 1 1 2 0v5a1 1 0 1 1-2 0V7zM7 9a1 1 0 0 1 2 0v3a1 1 0 1 1-2 0V9z" />
-                    <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
-                    <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
-                </svg> Mis medallas</a>
+        <li class="nav-link nav-datos">
+            <a alt="Mis medallas" href="<?php echo $path ?>misMedallas.php">
+                <i class="bi bi-clipboard-data"></i>
+                Mis medallas</a>
         </li>
 
-        <li class="nav-link">
-            <a alt="Efectos en la salud" href="<?php echo $path?>salud.php"><svg class="svg-icon" style="width: 34px; height: 34px;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1350 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M1316.571991 503.222857h-105.494505c39.103297-53.450549 60.764835-117.096088 60.764835-184.432527 0-85.138286-34.03956-165.19033-95.367033-225.437539C1049.881881-30.26989 844.237925-30.26989 717.925837 93.352791c-17.441758 16.969143-31.507692 35.918769-44.448351 56.286242-12.659341-19.804835-27.006593-38.754462-44.729671-56.286242-126.593407-123.622681-332.237363-123.622681-458.54945 0C108.589574 153.6 74.831332 233.652044 74.831332 318.79033c0 67.325187 21.661538 130.678154 60.764835 184.432527H33.758804c-18.848352 0-33.758242 15.269978-33.758241 33.938286a33.769495 33.769495 0 0 0 33.758241 33.949538h163.446154l451.797802 441.276484c1.969231 1.980484 12.096703 10.183736 23.912088 10.465055 9.846154 0 21.38022-7.348044 24.474726-10.465055l451.235164-441.276484H1316.571991c18.848352 0 33.758242-15.281231 33.758242-33.949538 0-18.668308-15.191209-33.938286-33.758242-33.938286zM216.897266 142.572308c100.430769-98.157714 263.876923-98.157714 364.307692 0 21.38022 20.93011 37.978022 43.840703 50.356044 70.149626 3.657143 7.640615 19.410989 45.821187 41.353846 45.821187 21.942857 0 38.259341-39.03578 41.353847-45.821187 0.281319-0.562637 0.562637-0.855209 0.562637-1.417846 12.940659-26.027604 28.975824-48.656879 49.793406-68.73178 100.430769-98.157714 263.876923-98.157714 364.307693 0 48.386813 47.239033 75.112088 110.029363 75.112088 176.510593 0 66.751297-26.725275 129.27156-75.112088 176.510594l-7.876923 7.640615H932.85331L866.462101 279.473231a34.129582 34.129582 0 0 0-30.101099-24.317187 33.758242 33.758242 0 0 0-33.195604 19.512264L666.725837 568.004923 587.112651 377.642198a33.66822 33.66822 0 0 0-28.975825-20.648791c-12.659341-1.125275-25.037363 5.660132-31.507692 16.687824l-76.237363 129.282813h-225.617582l-7.876923-7.651868c-48.386813-47.22778-75.112088-110.029363-75.112088-176.499341 0.281319-66.481231 26.725275-128.990242 75.112088-176.229275z m456.298901 798.832527l-378.654945-370.001582H461.925837c13.784615 0 27.850549-0.281319 37.134066-13.863385L551.385178 471.827692l82.989011 204.237363c5.063736 12.445538 14.90989 31.687736 30.663736 31.687736h0.562638c17.723077 0 25.037363-18.386989 30.663736-30.26989l131.094505-292.773978 48.105495 162.377143a33.780747 33.780747 0 0 0 32.351648 24.317187H1051.569793l-378.373626 369.990329z" fill="#2E323F" />
-                </svg>Efectos en la           salud
+        <li class="nav-link nav-informacion">
+            <a alt="Efectos en la salud" href="<?php echo $path ?>salud.php">
+                <a alt="Informacion" href="<?php echo $path ?>salud.php">
+                    <i class="bi bi-bookmark-heart"></i>
+                    Efectos en la salud
+                </a>
             </a>
         </li>
     </ul>
@@ -110,14 +97,22 @@
 
     function burgerMenu() {
         if (aux) {
-            document.getElementById("menu-desplegable-grandote").style.display = "inherit";
+            document.getElementById("menu-desplegable-grandote").style.left = "0";
+            document.getElementById("menu-desplegable-grandote").style.animation = "desplegarDerecha 0.1s linear 1";
+
+            document.getElementById("menu-desplegable-chiquito").style.left = "-100%";
+            document.getElementById("menu-desplegable-chiquito").style.animation = "desplegarIzquierda 0.1s linear 1";
+
             aux = 0;
         } else {
-            document.getElementById("menu-desplegable-grandote").style.display = "none";
+            document.getElementById("menu-desplegable-grandote").style.left = "-100%";
+            document.getElementById("menu-desplegable-grandote").style.animation = "desplegarIzquierda 0.1s linear 1";
+
+            document.getElementById("menu-desplegable-chiquito").style.left = "0";
+            document.getElementById("menu-desplegable-chiquito").style.animation = "desplegarDerecha 0.1s linear 1";
             aux = 1;
         }
 
 
     }
-
 </script>

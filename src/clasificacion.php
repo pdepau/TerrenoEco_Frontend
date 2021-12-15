@@ -7,12 +7,18 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>CLASIFICACION | Terreno Eco</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 
     <link rel="stylesheet" href="css/header-menu.css">
     <link rel="stylesheet" href="css/clasificacion.css">
 
 
-
+    <style>
+        .nav-clasificacion a {
+            color: #830053;
+        }
+    </style>
 
     <script src="https://kit.fontawesome.com/a81368914c.js"></script>
 </head>
