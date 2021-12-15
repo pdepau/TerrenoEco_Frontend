@@ -17,11 +17,28 @@ async function obtenerTodasLasMediciones(cb) {
   fetch(url + `mediciones`, { method: "get" }).then((response) => {
     if (response.ok) {
       response.json().then((json) => {
-        console.log(JSON.stringify(json));
         return cb(JSON.stringify(json));
       });
     } else {
-      document.getElementById("cuerpo").innerHTML = "Error 404";
+      
+    }
+  });
+}
+
+/**
+ * obtenerTodasLasMedidas() -> JSON de las medidas
+ * Recibe las medidas de la base de datos
+ *
+ *
+ */
+ async function obtenerUltimasMedicionesDeUsuario(cb,idUsuario,cuantas) {
+  fetch(url + 'ultimasMediciones/'+idUsuario+'/'+cuantas, { method: "get" }).then((response) => {
+    if (response.ok) {
+      response.json().then((json) => {
+        return cb(JSON.stringify(json));
+      });
+    } else {
+      
     }
   });
 }

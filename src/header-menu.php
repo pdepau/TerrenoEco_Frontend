@@ -5,7 +5,7 @@
 <header id="header">
     <link rel="shortcut icon" href="img/favicon.png">
 
-    <a href="#" onclick="burgerMenu()"><i class="fas fa-bars"></i></a>
+    <a href="#" onclick="burgerMenu()"><i class="bi bi-list"></i></a>
     <a href="<?php echo $path ?>mapa.php" class="logo"><img src="<?php echo $path ?>img/logo-header.png" alt="logo"></a>
 
 </header>
@@ -33,7 +33,7 @@
         </li>
 
         <li class="nav-link nav-datos">
-            <a alt="Mis datos" href="<?php echo $path ?>misMedallas.php">
+            <a alt="Mis datos" href="<?php echo $path ?>misMedidas.php">
                 <i class="bi bi-clipboard-data"></i>
 
 
@@ -69,7 +69,7 @@
         </li>
 
         <li class="nav-link nav-datos">
-            <a alt="Mis medallas" href="<?php echo $path ?>misMedallas.php">
+            <a alt="Mis medallas" href="<?php echo $path ?>misMedidas.php">
                 <i class="bi bi-clipboard-data"></i>
                 Mis medallas</a>
         </li>
@@ -100,12 +100,12 @@
             document.getElementById("menu-desplegable-grandote").style.left = "0";
             document.getElementById("menu-desplegable-grandote").style.animation = "desplegarDerecha 0.1s linear 1";
 
-            document.getElementById("menu-desplegable-chiquito").style.left = "-100%";
+            document.getElementById("menu-desplegable-chiquito").style.left = "-260px";
             document.getElementById("menu-desplegable-chiquito").style.animation = "desplegarIzquierda 0.1s linear 1";
 
             aux = 0;
         } else {
-            document.getElementById("menu-desplegable-grandote").style.left = "-100%";
+            document.getElementById("menu-desplegable-grandote").style.left = "-260px";
             document.getElementById("menu-desplegable-grandote").style.animation = "desplegarIzquierda 0.1s linear 1";
 
             document.getElementById("menu-desplegable-chiquito").style.left = "0";
