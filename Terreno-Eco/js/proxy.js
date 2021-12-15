@@ -35,7 +35,7 @@ async function obtenerTodasLasMediciones(cb) {
  * @param {callback} cb 
  */
 async function obtenerMedicionesAcotadas(data, cb) {
-  fetch(url + 'mediciones/acotadas'+'/'+data.latMax+'/'+data.latMin+'/'+data.lonMax+'/'+data.lonMin+'/'+data.tiempoMin+'/'+data.tiempoMax+'/'+data.tipo, { method: "get" }).then((response) => {
+  fetch(url + 'mediciones/acotadas'+'/'+data.latMax+'/'+data.latMin+'/'+data.lonMax+'/'+data.lonMin+'/'+data.tiempoMin+'/'+data.tiempoMax+'/'+data.tipo+'/'+data.factor, { method: "get" }).then((response) => {
     if (response.ok) {
       response.json().then((json) => {
         //console.log(JSON.stringify(json));
@@ -46,7 +46,6 @@ async function obtenerMedicionesAcotadas(data, cb) {
     }
   });
 }
-
 /**
  * mediciones:[medicion],
  * factor:Z =>
@@ -57,6 +56,7 @@ async function obtenerMedicionesAcotadas(data, cb) {
  * @param {number} factor para crear nuevas mediciones
  * @returns lista de medidas interpoladas
  */
+/* NO ESTA EN USO
 function interpolarMediciones(mediciones, factor) {
   let interpolados = [];
   let points = [];
@@ -142,7 +142,7 @@ function interpolarMediciones(mediciones, factor) {
 
   return interpolados;
 } // ()
-
+  */
 /**
  * id:Z =>
  *      obtenerTipo()

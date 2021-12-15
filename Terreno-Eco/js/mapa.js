@@ -169,6 +169,18 @@ let fechaMin = fechaMax - 3600000;
 // Ultimo tipo seleccionado en los botones
 var tipoSeleccionado = 1;
 //Objeto para la interpolación con los datos
+/**
+  {
+    "latMax":1,
+    "latMin":32,
+    "lonMax":1,
+    "lonMin":2,
+    "tiempoMin":1635496134293,
+    "tiempoMax":1635496134293,
+    "factor":2,
+    "tipo":1
+  }
+ */
 let datos = {
   latMax: bounds._northEast.lat,
   latMin: bounds._southWest.lat,
@@ -176,6 +188,7 @@ let datos = {
   lonMin: bounds._southWest.lng,
   tiempoMin: fechaMin,
   tiempoMax: fechaMax,
+  factor:2,
   tipo: tipoSeleccionado,
 };
 
@@ -224,7 +237,8 @@ map.on("moveend", function (ev) {
     lonMin: bounds._southWest.lng,
     tiempoMin: fechaMin,
     tiempoMax: fechaMax,
-    tipo: 2,
+    factor:2,
+    tipo: 2
   };
 
   obtenerMedicionesAcotadas(datos, callbackDatosRecibidos);
