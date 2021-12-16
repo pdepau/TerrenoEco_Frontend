@@ -59,7 +59,7 @@ async function obtenerMedicionesAcotadas(data, cb) {
         return cb(JSON.stringify(json));
       });
     } else {
-      document.getElementById("cuerpo").innerHTML = "Error 404";
+      console.error("No se han podido recibir las mediciones con los datos: " + JSON.stringify(data));
     }
   });
 }

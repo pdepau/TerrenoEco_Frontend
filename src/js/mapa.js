@@ -166,33 +166,6 @@ let fechaMin = fechaMax - 3600000;
 
 // Ultimo tipo seleccionado en los botones
 var tipoSeleccionado = 1;
-//Objeto para la interpolación con los datos
-/**
-  {
-    "latMax":1,
-    "latMin":32,
-    "lonMax":1,
-    "lonMin":2,
-    "tiempoMin":1635496134293,
-    "tiempoMax":1635496134293,
-    "factor":2,
-    "tipo":1
-  }
- */
-let datos = {
-  latMax: bounds._northEast.lat,
-  latMin: bounds._southWest.lat,
-  lonMax: bounds._northEast.lng,
-  lonMin: bounds._southWest.lng,
-  tiempoMin: fechaMin,
-  tiempoMax: fechaMax,
-  factor: 2,
-  tipo: tipoSeleccionado,
-};
-
-//Llamada a la logica con un callback
-//
-obtenerMedicionesAcotadas(datos, callbackDatosRecibidos);
 
 //Pasa la lista de medidas formateadas por region a puntos para el mapa
 function medidasAgeoson(medidas) {
@@ -236,7 +209,7 @@ map.on("moveend", function (ev) {
     tiempoMin: fechaMin,
     tiempoMax: fechaMax,
     factor: 2,
-    tipo: 2,
+    tipo: tipoSeleccionado,
   };
 
   obtenerMedicionesAcotadas(datos, callbackDatosRecibidos);
@@ -359,9 +332,9 @@ function actualizarLeyenda(tipo) {
   const leyendaMedio = document.getElementById("leyendaMedio");
   const leyendaBajo = document.getElementById("leyendaBajo");
 
-  leyendaBajo.innerHTML = tipoJson[0].riesgo_leve;
-  leyendaMedio.innerHTML = tipoJson[0].riesgo_medio;
-  leyendaAlto.innerHTML = tipoJson[0].riesgo_alto;
+  leyendaBajo.innerHTML = tipoJson[0].riesgo_leve + ' ppm'
+  leyendaMedio.innerHTML = tipoJson[0].riesgo_medio + ' ppm';
+  leyendaAlto.innerHTML = tipoJson[0].riesgo_alto + ' ppm';
 }
 
 //Ubicacion para acceder a ella en global
@@ -421,3 +394,35 @@ function actualizarPopupMarkers(lat, lon) {
 function enviarValoresConsola(so2, no2, co, o3) {
   console.log("DatosEcoparada," + so2 + "," + no2 + "," + co + "," + o3);
 }
+
+function setup() {
+  //Objeto para la interpolación con los datos
+  /**
+    {
+      "latMax":1,
+      "latMin":32,
+      "lonMax":1,
+      "lonMin":2,
+      "tiempoMin":1635496134293,
+      "tiempoMax":1635496134293,
+      "factor":2,
+      "tipo":1
+    }
+  */
+  let datos = {
+    latMax: bounds._northEast.lat,
+    latMin: bounds._southWest.lat,
+    lonMax: bounds._northEast.lng,
+    lonMin: bounds._southWest.lng,
+    tiempoMin: fechaMin,
+    tiempoMax: fechaMax,
+    factor: 2,
+    tipo: tipoSeleccionado,
+  };
+  //Llamada a la logica con un callback
+  //
+  obtenerMedicionesAcotadas(datos, callbackDatosRecibidos);
+  obtenerTipo(tipoSeleccionado, actualizarLeyenda);
+}
+
+setup();
