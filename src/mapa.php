@@ -70,4 +70,6 @@
 <script src="js/proxy.js"></script>
 <script src=js/mapa.js></script>
 
+<script>ponerUbicacion()</script>
+
 </html>

@@ -7,10 +7,9 @@
 //Layer para el mapa persé
 //No hace falta tocar nada, a menos que se quiera cambiar el estilo
 var baseLayer = L.tileLayer(
-  "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZmVycmFuZ3Y5OCIsImEiOiJja3dhM2ExcWkwZjdlMnNxbGllNHk1djNtIn0.jp_9QtnYaRwvjpgKsQmWWg",
+  "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiemFraWwiLCJhIjoiY2t2MTNtcWJxMGttYzJvcGExdDNrZjB2eCJ9.-eGzsYW_IZcypdpOpoPLcA",
   {
-    attribution:
-      'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    attribution: "",
     maxZoom: 18,
     id: "mapbox/streets-v11",
     tileSize: 512,
@@ -93,7 +92,6 @@ var marker3 = L.marker([38.996852, -0.165307], {
 var marker4 = L.marker([38.996852, -0.164307], {
   icon: EcoParadaMarker,
 }).bindPopup(crearDivPopoup(12, 10, 14, 15, false));
-
 
 var ecoparadas = [marker1, marker2, marker3, marker4];
 var ecoparadasMapa = L.layerGroup(ecoparadas);
@@ -188,7 +186,7 @@ let datos = {
   lonMin: bounds._southWest.lng,
   tiempoMin: fechaMin,
   tiempoMax: fechaMax,
-  factor:2,
+  factor: 2,
   tipo: tipoSeleccionado,
 };
 
@@ -237,8 +235,8 @@ map.on("moveend", function (ev) {
     lonMin: bounds._southWest.lng,
     tiempoMin: fechaMin,
     tiempoMax: fechaMax,
-    factor:2,
-    tipo: 2
+    factor: 2,
+    tipo: 2,
   };
 
   obtenerMedicionesAcotadas(datos, callbackDatosRecibidos);
@@ -253,22 +251,24 @@ var MarkerUbicacion = L.icon({
   //shadowAnchor: [4, 62], // the same for the shadow
 });
 
-//Centrar el mapa en la ubicación proporcionada por el navegador
-map.locate({ setView: true, maxZoom: 16 });
-function onLocationFound(e) {
-  var radius = e.accuracy / 2;
+function ponerUbicacion() {
+  //Centrar el mapa en la ubicación proporcionada por el navegador
+  map.locate({ setView: true, maxZoom: 16 });
+  function onLocationFound(e) {
+    var radius = e.accuracy / 2;
 
-  L.marker(e.latlng).addTo(map);
+    L.marker(e.latlng).addTo(map);
 
-  L.circle(e.latlng, radius).addTo(map);
+    L.circle(e.latlng, radius).addTo(map);
 
-  //actualizarPopupMarkers(e.latlng.lat, e.latlng.lng);
+    //actualizarPopupMarkers(e.latlng.lat, e.latlng.lng);
+  }
+  function onLocationError(e) {
+    alert(e.message);
+  }
+  map.on("locationfound", onLocationFound);
+  map.on("locationerror", onLocationError);
 }
-function onLocationError(e) {
-  alert(e.message);
-}
-map.on("locationfound", onLocationFound);
-map.on("locationerror", onLocationError);
 
 //Obtiene la leyenda
 let leyenda = document.getElementById("leyenda");
@@ -311,14 +311,14 @@ leyenda.addEventListener("click", function () {
  * @param {number} tipo numerico dependiendo del valor
  */
 function selectorCambiado(tipo, botonPulsado) {
-  // busca el boton activado 
+  // busca el boton activado
   let selectedButtons = document.getElementsByClassName("selected");
   // quita la clase al boton activado
-  for(let button of selectedButtons) {
-    button.classList.remove('selected');
+  for (let button of selectedButtons) {
+    button.classList.remove("selected");
   } // for
   // activamos el boton que se haya pulsado
-  botonPulsado.classList.add('selected');
+  botonPulsado.classList.add("selected");
   switch (true) {
     case tipo == 1 && tipoSeleccionado != 1:
       // CO2
@@ -347,7 +347,7 @@ function selectorCambiado(tipo, botonPulsado) {
 /**
  * tipo:Json =>
  *      actualizarLeyenda()
- * 
+ *
  * Actualiza la leyenda para el nuevo contaminante seleccionado
  *
  * @param {tipo} tipo recibido
@@ -368,9 +368,9 @@ function actualizarLeyenda(tipo) {
 var ubicacion;
 /**
  * Centra el mapa en la posicion proporcionada
- * 
- * @param {long} lat 
- * @param {long} lon 
+ *
+ * @param {long} lat
+ * @param {long} lon
  */
 function centrarMapaEnUbicacion(lat, lon) {
   if (ubicacion != null) {
@@ -391,9 +391,9 @@ function centrarMapaEnUbicacion(lat, lon) {
 
 /**
  * Actualiza los markers para que tengan el boton de calibración según la distancia
- * 
- * @param {long} lat 
- * @param {long} lon 
+ *
+ * @param {long} lat
+ * @param {long} lon
  */
 function actualizarPopupMarkers(lat, lon) {
   ecoparadas.forEach((ecoparada) => {
@@ -402,7 +402,7 @@ function actualizarPopupMarkers(lat, lon) {
         Math.pow(lon - ecoparada._latlng.lng, 2)
     );
 
-      let distanciaEnMetros=distancia*111110;
+    let distanciaEnMetros = distancia * 111110;
 
     if (distanciaEnMetros < 200) {
       ecoparada.bindPopup(crearDivPopoup(12, 13, 14, 15, true));
@@ -412,11 +412,11 @@ function actualizarPopupMarkers(lat, lon) {
 
 /**
  * Envia los valores de la Ecoparada al console para leerlos desde Android
- * 
- * @param {int} so2 
- * @param {int} no2 
- * @param {int} co 
- * @param {int} o3 
+ *
+ * @param {int} so2
+ * @param {int} no2
+ * @param {int} co
+ * @param {int} o3
  */
 function enviarValoresConsola(so2, no2, co, o3) {
   console.log("DatosEcoparada," + so2 + "," + no2 + "," + co + "," + o3);
