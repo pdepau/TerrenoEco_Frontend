@@ -2,10 +2,50 @@
     margin-left: 80px;
     height: 92vh;
     background-color: #eeeeee;
-    display: flex;
-    font-family: roboto;
+    width: 100%;
+    font-family: Roboto;
+}
+.ordenador{
+    padding-right: 80px;
+}
+h1{
+    text-align: center;
 }
 
+.tabla {
+    border-collapse: collapse;
+    color:white;
+    padding-left: 4px;
+    padding-right: 10px;
+}
+tablaOrdenador{
+    margin: auto;
+}
+th{
+
+    background: #666666;
+    border-collapse: collapse;
+    color:white;
+}
+td {
+
+    padding-right: 2px;
+    padding-left: 2px;
+    border-collapse: collapse;
+    text-align:center;
+}
+
+.berde{
+    background: #3AB54B;
+}
+
+.naranga{
+    background: #F59F4F;
+}
+
+.rogo{
+    background: #F54F4F;
+}
 
 .link-descarga {
     margin: 10px;
