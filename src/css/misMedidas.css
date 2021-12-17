@@ -1,0 +1,118 @@
+#contenedor {
+  margin-left: 80px;
+  background-color: #eeeeee;
+  display: flex;
+  font-family: roboto;
+}
+
+#seccion-sensores {
+  /*border: 1px solid black;*/
+  width: 20%;
+}
+
+.sensor {
+  margin: 13% 5%;
+  border-radius: 20px;
+  background-color: white;
+  border: 1px solid #eeeeee;
+  height: 160px;
+}
+
+#seccion-valores {
+  /*border: 1px solid black;*/
+  width: 50%;
+}
+
+.contenedor-valores {
+  margin: 5% 5%;
+  border-radius: 20px;
+  background-color: white;
+  border: 1px solid #eeeeee;
+  height: 80vh;
+  overflow: scroll;
+  width: 100%;
+}
+
+#seccion-graficas {
+  /*border: 1px solid black;*/
+  width: 30%;
+}
+
+#seccion-graficas img {
+  max-height: 80vh;
+  margin: 9% 13%;
+}
+
+.circulo {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #3ab54b;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.sensor-titulo {
+  display: flex;
+}
+
+.sensor-titulo-texto {
+  line-height: 18px;
+  font-size: 18px;
+  font-weight: 700;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+hr {
+  margin: 0 auto;
+  width: 96%;
+  border: 1px solid #eeeeee;
+}
+
+.sensor-ultimas-medidas {
+  font-size: 14px;
+  padding: 10px;
+}
+
+.styled-table {
+  margin: 0 auto;
+  width: 90vh;
+  padding: 10px;
+  max-height: 500px;
+}
+
+td {
+  text-align: left;
+}
+
+.td-valor-bueno {
+  background-color: #3ab54b;
+  color: white;
+  height: 30px;
+  text-align: center;
+}
+
+.td-valor-malo {
+  background-color: #f54f4f;
+  color: white;
+  height: 30px;
+  text-align: center;
+}
+
+.td-valor-regular {
+  background-color: #f59f4f;
+  color: white;
+  height: 30px;
+  text-align: center;
+}
+
+th {
+  color: gray;
+  padding-bottom: 15px;
+  text-align: left;
+}
+
+.vl {
+  border-left: 2px solid #eeeeee;
+}

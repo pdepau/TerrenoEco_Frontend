@@ -1,0 +1,275 @@
+#contenedor {
+    margin-left: 80px;
+    height: 92vh;
+    background-color: #eeeeee;
+    display: flex;
+    font-family: roboto;
+}
+
+#informacion {
+    /*border: 1px solid black;*/
+    width: 60%;
+}
+
+#ranking {
+    /*border: 1px solid black;*/
+    width: 40%;
+}
+
+#info-usuario {
+    display: flex;
+    margin: 2% 5%;
+    border-radius: 20px;
+    background-color: white;
+    /*border: 1px solid #eeeeee;*/
+    height: 400px;
+}
+
+.info-user-1 {
+    width: 33%;
+}
+
+.info-user-2 {
+    width: 33%;
+}
+
+.info-user-3 {
+    width: 33%;
+}
+
+#medallas {
+    display: flex;
+    margin: 0 5%;
+    border-radius: 20px;
+    border: 1px solid #eeeeee;
+    background-color: white;
+    height: 220px;
+    align-items: center;
+}
+
+.texto-medallas {
+    width: 33%;
+    text-align: center;
+}
+
+.vl {
+    border-left: 2px solid #eeeeee;
+    height: 95%;
+}
+
+
+
+.imagenes-medallas img {
+    margin: 0 auto;
+    width: 40px;
+    height: 40px;
+}
+
+.fa-edit {
+    color: #820053;
+}
+
+.nombre-foto img {
+    height: 85px;
+    width: 85px;
+    padding: 10px;
+}
+
+.nombre-foto {
+    text-align: center;
+}
+
+.nombre-usuario {
+    display: flex;
+    justify-content: center;
+}
+
+hr {
+    margin: 0 auto;
+    width: 90%;
+    border: 1px solid #eeeeee;
+}
+
+.fa-shoe-prints {
+    color: #820053;
+    transform: rotate(270deg);
+}
+
+.fa-map-pin {
+    color: #820053;
+}
+
+.distancias {
+    display: flex;
+    font-size: 12px;
+    padding: 0 10px;
+}
+
+.dist-semana,
+.dist-mes,
+.dist-total {
+    margin-left: auto;
+    margin-right: 0;
+}
+
+.dist1 {
+    margin-top: 15px;
+}
+
+.dist3 {
+    margin-bottom: 5px;
+}
+
+.posicion-semana {
+    text-align: center;
+}
+
+.posicion-semana h1 {
+    font-size: 24px;
+    color: #EABE3F;
+}
+
+.posicion-semana p {
+    font-size: 10px;
+}
+
+.top-mes-siempre {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.top-mes-siempre h1 {
+    font-size: 18px;
+}
+
+.top-mes-siempre p {
+    font-size: 10px;
+}
+
+.info-user-2 {
+    margin: 0 auto;
+    text-align: center;
+    font-size: 22px;
+    padding: 50px 5px;
+}
+
+.entrada-diario {
+    display: flex;
+    font-size: 14px;
+    padding: 0 10px;
+    margin-top: 15px;
+}
+
+.fecha-diario {
+    font-size: 10px;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.styled-table {
+    margin: 20px auto;
+    width: 550px;
+    padding-top: 10px;
+    max-height: 500px;
+    border-collapse: separate;
+    border-spacing: 0 15px;
+
+}
+
+td img {
+    height: 25px;
+    width: 25px;
+}
+
+td {
+    padding: 10px;
+    text-align: center;
+
+
+}
+
+tr {
+    border: 1px solid black;
+    border-radius: 20px;
+
+}
+
+
+th,
+td {
+    text-align: center;
+    padding: 5px;
+}
+
+
+.td-posicion {
+    color: #EABE3F;
+    text-align: center;
+}
+
+
+
+table {
+    border-collapse: separate;
+    border-spacing: 0 10px;
+    margin-top: -10px;
+    /* correct offset on first border spacing if desired */
+}
+
+td {
+    border: solid 1px #eee;
+    border-bottom: solid 3px #aaa;
+    border-style: solid none;
+    padding: 10px;
+    background-color: white;
+}
+
+td:first-child {
+    border-left-style: solid;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+td:last-child {
+    border-right-style: solid;
+    border-bottom-right-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+.selector {
+    display: flex;
+    margin-top: 20px;
+    justify-content: space-between;
+    padding: 0 15px;
+}
+
+.puntos-totales {
+    color: #820053;
+}
+
+.fecha-inicio {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.fa-clock {
+    color: #820053;
+}
+
+.imagenes-medallas {}
+
+.medallas-fila {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    width: 500px;
+}
+
+.img-medalla {
+    height: 30px;
+    width: 30px;
+    margin: 0 5px;
+}
