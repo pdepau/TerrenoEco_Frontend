@@ -26,6 +26,24 @@ async function obtenerTodasLasMediciones(cb) {
 }
 
 /**
+ * obtenerTodosLosNodos() -> JSON de las nodos
+ * Recibe las nodos de la base de datos
+ *
+ *
+ */
+ async function obtenerTodosLosNodos(cb) {
+  fetch(url + `nodos`, { method: "get" }).then((response) => {
+    if (response.ok) {
+      response.json().then((json) => {
+        return cb(JSON.stringify(json));
+      });
+    } else {
+      
+    }
+  });
+}
+
+/**
  * obtenerTodasLasMedidas() -> JSON de las medidas
  * Recibe las medidas de la base de datos
  *

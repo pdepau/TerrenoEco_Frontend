@@ -4,7 +4,7 @@
 <!--        HEADER  -->
 <header id="header">
     <link rel="shortcut icon" href="img/favicon.png">
-
+    
     <a href="#" onclick="burgerMenu()"><i class="bi bi-list"></i></a>
     <a href="<?php echo $path ?>mapa.php" class="logo">
         <img src="<?php echo $path ?>img/logo-header.png" alt="logo">
@@ -84,8 +84,16 @@
         <li class="nav-link nav-informacion">
             <a alt="Efectos en la salud" href="<?php echo $path ?>salud.php">
                 <a alt="Informacion" href="<?php echo $path ?>salud.php">
-                    <i class="bi bi-info-square"></i>
+                <i class="bi bi-bookmark-heart"></i>
                     Efectos en la salud
+                </a>
+            </a>
+        </li>
+        <li class="nav-link nav-estado-nodos">
+            <a alt="Efectos en la salud" href="<?php echo $path ?>estado-nodos.php">
+                <a alt="Informacion" href="<?php echo $path ?>estado-nodos.php">
+                    <i class="bi bi-info-square"></i>
+                    Información de los nodos
                 </a>
             </a>
         </li>

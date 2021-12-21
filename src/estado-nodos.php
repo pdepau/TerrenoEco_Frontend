@@ -28,7 +28,7 @@
 
     <div class="contenedor">
 
-        <div class="lista-nodos">
+        <div class="lista-nodos" id="lista-nodos">
 
             <div class="nodo">
                 <div class="categoria-nodo">
@@ -48,6 +48,13 @@
                         Juan Ramon De la Rosa
                     </div>
                 </div>
+                <div class="categoria-nodo">
+                    <div class="leyenda-nodo">Última medición :</div>
+                    <div class="tiempo-nodo">
+
+                        123123123
+                    </div>
+                </div>
             </div>
 
         </div>
@@ -55,5 +62,8 @@
     </div>
 
 </body>
+
+<script src="js/proxy.js"></script>
+<script src="js/estado-nodos.js"></script>
 
 </html>

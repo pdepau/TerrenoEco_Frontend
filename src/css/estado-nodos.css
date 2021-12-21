@@ -26,10 +26,21 @@
 .estado-nodo{
     border-radius: 8px;
     padding: 8px;
-    background-color: #3AB54B;
     color: white;
     min-width: 80px;
     text-align: center;
+}
+
+.estado-nodo.bien{
+    background-color: #3AB54B;
+}
+
+.estado-nodo.regular{
+    background-color: #f59f4f;
+}
+
+.estado-nodo.mal{
+    background-color: #f54f4f;
 }
 
 .usuario-nodo{
