@@ -59,7 +59,6 @@
             <div class="ecoparada-leyenda"><img src="img/Ecoparada.png" alt="ecoparada" id="ecoparada-img">Ecoparada</div>
         </div>
 
-
     </div>
 
 </body>
