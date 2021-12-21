@@ -116,3 +116,11 @@ th {
 .vl {
   border-left: 2px solid #eeeeee;
 }
+
+
+
+@media (max-width: 900px) {
+  #contenedor {
+    margin: 0;
+  }
+}

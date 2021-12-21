@@ -130,3 +130,11 @@ Fin leyenda
     width: 100%;
     margin-top: 8px;
 }
+
+
+
+@media (max-width: 900px) {
+    .contenedor {
+      margin: 0;
+    }
+  }

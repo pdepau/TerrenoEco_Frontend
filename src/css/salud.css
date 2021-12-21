@@ -1,9 +1,9 @@
 #contenedor {
     margin-left: 80px;
-    height: 92vh;
+    padding: 32px;
     background-color: #eeeeee;
-    width: 100%;
     font-family: Roboto;
+    text-align: justify;
 }
 .ordenador{
     padding-right: 80px;
@@ -14,25 +14,22 @@ h1{
 
 .tabla {
     border-collapse: collapse;
-    color:white;
-    padding-left: 4px;
-    padding-right: 10px;
-}
-tablaOrdenador{
-    margin: auto;
+    color:white; 
+    width: 100%;
+
 }
 th{
-
+    text-align: center;
+    padding: 8px;
     background: #666666;
     border-collapse: collapse;
     color:white;
 }
 td {
 
-    padding-right: 2px;
-    padding-left: 2px;
+    padding: 8px;
     border-collapse: collapse;
-    text-align:center;
+    text-align: justify;
 }
 
 .berde{
@@ -59,3 +56,9 @@ td {
     font-size: 16px;
     text-decoration: none;
 }
+
+@media (max-width: 900px) {
+    #contenedor {
+      margin: 0;
+    }
+  }

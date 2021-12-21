@@ -6,7 +6,9 @@
     <link rel="shortcut icon" href="img/favicon.png">
 
     <a href="#" onclick="burgerMenu()"><i class="bi bi-list"></i></a>
-    <a href="<?php echo $path ?>mapa.php" class="logo"><img src="<?php echo $path ?>img/logo-header.png" alt="logo"></a>
+    <a href="<?php echo $path ?>mapa.php" class="logo">
+        <img src="<?php echo $path ?>img/logo-header.png" alt="logo">
+    </a>
 
 </header>
 <div id="space-header"></div>
@@ -45,6 +47,11 @@
                 <i class="bi bi-bookmark-heart"></i>
             </a>
         </li>
+        <li class="nav-link nav-estado-nodos administrador">
+            <a alt="Informacion" href="<?php echo $path ?>estado-nodos.php">
+                <i class="bi bi-info-square"></i>
+            </a>
+        </li>
     </ul>
 
     <!-- ----------------- -->
@@ -77,7 +84,7 @@
         <li class="nav-link nav-informacion">
             <a alt="Efectos en la salud" href="<?php echo $path ?>salud.php">
                 <a alt="Informacion" href="<?php echo $path ?>salud.php">
-                    <i class="bi bi-bookmark-heart"></i>
+                    <i class="bi bi-info-square"></i>
                     Efectos en la salud
                 </a>
             </a>
