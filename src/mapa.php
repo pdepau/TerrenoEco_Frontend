@@ -67,7 +67,9 @@
 <script src="js/leaflet-heatmap.js"></script>
 <script src="js/Punto.js"></script>
 <script src="js/proxy.js"></script>
+<script src="js/leaflet-idw.js"></script>
 <script src=js/mapa.js></script>
+
 
 <script>ponerUbicacion()</script>
 
