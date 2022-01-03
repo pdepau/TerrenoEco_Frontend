@@ -8,6 +8,23 @@
 const url = new URL("http://localhost:8000/");
 
 /**
+ * setup()
+ * Averigua si existe una sesion iniciada
+ *
+ */
+ async function setup() {
+  fetch(url, { method: "get" }).then((response) => {
+    if (response.ok) {
+      response.json().then((json) => {
+        console.debug("Sesion iniciada")
+      });
+    } else {
+      console.error("No existe una sesion")
+    }
+  });
+}
+
+/**
  * obtenerTodasLasMedidas() -> JSON de las medidas
  * Recibe las medidas de la base de datos
  *
@@ -102,7 +119,8 @@ function obtenerTipo(id, cb) {
 }
 
 /**
- * formulario =>
+ * correo:texto,
+ * contraseña:texto =>
  *      iniciarSesion()
  * VoF <=
  * 
@@ -110,7 +128,7 @@ function obtenerTipo(id, cb) {
  * 
  * @param {form} formulario 
  */
-function iniciarSesion(cb) {
+function iniciarSesion() {
   const form = document.querySelector('form');
   const formData = new FormData(form);  
   /*Cuerpo del formulario: 
@@ -135,6 +153,43 @@ function iniciarSesion(cb) {
       });
     } else {
       console.error("Error al iniciar sesión");
+      // TODO: mensaje de error si no se pone bien algun dato
+    }
+  });
+}
+
+/**
+ * correo:texto,
+ * contraseña:texto,
+ * telefono:Z =>
+ *      crearCuenta()
+ * VoF <=
+ * 
+ * Crea un usuario nuevo en el servidor
+ * 
+ * @param {form} formulario 
+ */
+ function crearCuenta() {
+  const form = document.querySelector('form');
+  const formData = new FormData(form);  
+  // Cuerpo
+  let payload = {
+    telefono: formData.get("telefono"),
+    correo: formData.get("correo"),
+    password: formData.get("password")
+  }
+  let cuerpo = JSON.stringify(payload);
+  fetch(url + `usuario`, { 
+    method: "POST", 
+    body: cuerpo, 
+    headers: {"Content-type": "application/json; charset=UTF-8"} 
+  }).then((response) => {
+    if (response.ok) {
+      response.json().then((json) => {
+        // TODO: aqui abre la pagina que tenga que ser
+      });
+    } else {
+      console.error("Error al crear sesión");
       // TODO: mensaje de error si no se pone bien algun dato
     }
   });
