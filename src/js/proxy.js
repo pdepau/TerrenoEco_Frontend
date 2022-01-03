@@ -110,7 +110,7 @@ function obtenerTipo(id, cb) {
  * 
  * @param {form} formulario 
  */
-function iniciarSesion() {
+function iniciarSesion(cb) {
   const form = document.querySelector('form');
   const formData = new FormData(form);  
   /*Cuerpo del formulario: 
@@ -124,7 +124,6 @@ function iniciarSesion() {
     password: formData.get("password")
   }
   let cuerpo = JSON.stringify(payload);
-  console.log(cuerpo);
   fetch(url + `login`, { 
     method: "POST", 
     body: cuerpo, 
@@ -132,10 +131,11 @@ function iniciarSesion() {
   }).then((response) => {
     if (response.ok) {
       response.json().then((json) => {
-        return cb(JSON.stringify(json));
+        // TODO: aqui abre la pagina que tenga que ser
       });
     } else {
       console.error("Error al iniciar sesión");
+      // TODO: mensaje de error si no se pone bien algun dato
     }
   });
 }

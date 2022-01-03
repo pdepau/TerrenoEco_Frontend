@@ -99,20 +99,17 @@ ecoparadasMapa.addTo(map);
 
 /**
  * Mapa IDW de interpolacion con ajustes
- *
+ * 
  * opacity - the opacity of the IDW layer
  * max - maximum point values, 1.0 by default
  * cellSize - height and width of each cell, 25 by default
  * exp - exponent used for weighting, 1 by default
  * gradient - color gradient config, e.g. {0.4: 'blue', 0.65: 'lime', 1: 'red'}
  */
-var idw = L.idwLayer(
-  [
-    [-37.8839, 175.3745188667, 571],
-    [-37.8869090667, 175.3657417333, 486],
-  ],
-  { opacity: 0.3, cellSize: 3, exp: 1, max: 1 }
-).addTo(map);
+var idw = L.idwLayer([
+  [-37.8839, 175.3745188667, 571],
+  [-37.8869090667, 175.3657417333, 486]],
+  {opacity: 0.3, cellSize: 3, exp: 1, max: 1}).addTo(map);
 
 //Funcion que se llama al recibir los datos del servidor
 //Ahora mismo utiliza las medidas acotadas simplemente
@@ -132,7 +129,7 @@ function medidasAgeoson(medidas) {
     puntos.push([
       element.lat,
       element.lng,
-      element.valor / 100, // para que este entre 0 y 1
+      element.valor/100 // para que este entre 0 y 1
     ]);
   });
 
@@ -142,17 +139,16 @@ function medidasAgeoson(medidas) {
 //Pone los valores en el layer del mapa de calor
 function llenarMapa(puntos) {
   // Luis: implementacion de la libreria idw cada vez que se llena de datos. Así creo que
-  // es más rápido al ejecutarse
-  if (puntos.length < 1) {
+  // es más rápido al ejecutarse 
+  if(puntos.length < 1) {
     puntos = [
       [39.0031, -0.156126, 0.1],
-      [38.9919, -0.147516, 0.74],
-    ];
+      [38.9919, -0.147516, 0.74]
+      ];
   }
   map.removeLayer(idw);
-  idw = L.idwLayer(puntos, { opacity: 0.3, cellSize: 3, exp: 1, max: 1 }).addTo(
-    map
-  );
+  idw = L.idwLayer(puntos,
+    {opacity: 0.3, cellSize: 3, exp: 1, max: 1}).addTo(map);
   // idw.data = puntos;
   console.debug(idw.data);
   // console.debug(idw.data)
@@ -186,62 +182,26 @@ function ponerUbicacion() {
   map.on("locationerror", onLocationError);
 }
 
-let datos = {
-  latMax: bounds._northEast.lat,
-  latMin: bounds._southWest.lat,
-  lonMax: bounds._northEast.lng,
-  lonMin: bounds._southWest.lng,
-  tiempoMin: fechaMin,
-  tiempoMax: fechaMax,
-  factor: factorInterpolacion,
-  tipo: tipoSeleccionado,
-};
-
 //Se llama cada vez que se mueve el mapa
 map.on("moveend", function (ev) {
   //Vuelve a obtener los margenes tras mover el mapa
   bounds = map.getBounds();
 
   //Vuelve a obtener la fecha
-  fechaMax = 1640524043187; //new Date().getTime()
-  fechaMin = fechaMax - 3600000;
+  let fechaMax = 1640524043187; //new Date().getTime()
+  let fechaMin = fechaMax - 3600000;
 
   //Recalcula el objeto para la llamada
-  datos.tiempoMax = fechaMax;
-  datos.tiempoMin = fechaMin;
-
-  obtenerMedicionesAcotadas(datos, callbackDatosRecibidos);
-});
-
-document.getElementById("fecha").addEventListener("input", (event) => {
-  console.log(`Te gusta el sabor ${event.target.value}`);
-  let date = new Date(event.target.value);
-  date.setHours(document.getElementById("hora").value);
-  console.log(date);
-
-  //Vuelve a obtener la fecha
-  fechaMax = date.getTime(); //new Date().getTime()
-  fechaMin = fechaMax - 3600000;
-
-  //Recalcula el objeto para la llamada
-  datos.tiempoMax = fechaMax;
-  datos.tiempoMin = fechaMin;
-
-  obtenerMedicionesAcotadas(datos, callbackDatosRecibidos);
-});
-
-document.getElementById("hora").addEventListener("change", (event) => {
-  let date = new Date(document.getElementById("fecha").value);
-  date.setHours(document.getElementById("hora").value);
-  console.log(date);
-
-  //Vuelve a obtener la fecha
-  fechaMax = date.getTime(); //new Date().getTime()
-  fechaMin = fechaMax - 3600000;
-
-  //Recalcula el objeto para la llamada
-  datos.tiempoMax = fechaMax;
-  datos.tiempoMin = fechaMin;
+  let datos = {
+    latMax: bounds._northEast.lat,
+    latMin: bounds._southWest.lat,
+    lonMax: bounds._northEast.lng,
+    lonMin: bounds._southWest.lng,
+    tiempoMin: fechaMin,
+    tiempoMax: fechaMax,
+    factor: factorInterpolacion,
+    tipo: tipoSeleccionado,
+  };
 
   obtenerMedicionesAcotadas(datos, callbackDatosRecibidos);
 });
@@ -278,37 +238,6 @@ leyenda.addEventListener("click", function () {
     leyenda.classList.add("expandido");
   }
 });
-
-Date.prototype.toDateInputValue = (function() {
-  var local = new Date(this);
-  local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
-  return local.toJSON().slice(0,10);
-});
-
-
-let selector = document.getElementById("seleccionFecha");
-
-selector.addEventListener('change', function() {
-  if (this.checked) {
-    document.getElementById("selectores").style.display = "flex"
-    document.getElementById("hora").value = new Date().getHours();
-    document.getElementById("fecha").value = new Date().toDateInputValue();
-    
-  } else {
-    document.getElementById("selectores").style.display = "none"
-
-    let date = new Date();
-    fechaMax = date.getTime(); //new Date().getTime()
-    fechaMin = fechaMax - 3600000;
-  
-    //Recalcula el objeto para la llamada
-    datos.tiempoMax = fechaMax;
-    datos.tiempoMin = fechaMin;
-  
-    obtenerMedicionesAcotadas(datos, callbackDatosRecibidos);
-  }
-});
-
 
 // -------------------------------------------------------------
 // FUNCIONES
@@ -371,9 +300,9 @@ function actualizarLeyenda(tipo) {
   const leyendaMedio = document.getElementById("leyendaMedio");
   const leyendaBajo = document.getElementById("leyendaBajo");
 
-  leyendaBajo.innerHTML = tipoJson[0].riesgo_leve + " ppm";
-  leyendaMedio.innerHTML = tipoJson[0].riesgo_medio + " ppm";
-  leyendaAlto.innerHTML = tipoJson[0].riesgo_alto + " ppm";
+  leyendaBajo.innerHTML = tipoJson[0].riesgo_leve + ' ppm'
+  leyendaMedio.innerHTML = tipoJson[0].riesgo_medio + ' ppm';
+  leyendaAlto.innerHTML = tipoJson[0].riesgo_alto + ' ppm';
 }
 
 //Ubicacion para acceder a ella en global
