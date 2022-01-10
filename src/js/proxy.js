@@ -8,11 +8,6 @@
 const url = new URL("http://localhost:8000/");
 
 /**
-<<<<<<< Updated upstream
- * obtenerTodasLasMedidas() -> JSON de las medidas
- * Recibe las medidas de la base de datos
- *
-=======
  * setup()
  * Averigua si existe una sesion iniciada
  *
@@ -34,7 +29,6 @@ const url = new URL("http://localhost:8000/");
  * [medicion] <=
  * 
  * Recibe las mediciones de la base de datos
->>>>>>> Stashed changes
  *
  */
 async function obtenerTodasLasMediciones(cb) {
