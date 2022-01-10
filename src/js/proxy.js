@@ -8,9 +8,33 @@
 const url = new URL("http://localhost:8000/");
 
 /**
+<<<<<<< Updated upstream
  * obtenerTodasLasMedidas() -> JSON de las medidas
  * Recibe las medidas de la base de datos
  *
+=======
+ * setup()
+ * Averigua si existe una sesion iniciada
+ *
+ */
+ async function setup() {
+  fetch(url, { method: "get" }).then((response) => {
+    if (response.ok) {
+      response.json().then((json) => {
+        console.debug("Sesion iniciada")
+      });
+    } else {
+      console.error("No existe una sesion")
+    }
+  });
+}
+
+/**
+ *      obtenerTodasLasMediciones()
+ * [medicion] <=
+ * 
+ * Recibe las mediciones de la base de datos
+>>>>>>> Stashed changes
  *
  */
 async function obtenerTodasLasMediciones(cb) {
@@ -26,9 +50,10 @@ async function obtenerTodasLasMediciones(cb) {
 }
 
 /**
- * obtenerTodosLosNodos() -> JSON de las nodos
- * Recibe las nodos de la base de datos
- *
+ *      obtenerTodosLosNodos()
+ * [nodo] <=
+ * 
+ * Recibe los nodos de la base de datos
  *
  */
  async function obtenerTodosLosNodos(cb) {
@@ -44,10 +69,17 @@ async function obtenerTodasLasMediciones(cb) {
 }
 
 /**
- * obtenerTodasLasMedidas() -> JSON de las medidas
+ * 
+ * idUsuario:Z,
+ * cuantas:Z =>
+ *      obtenerUltimasMedicionesDeUsuario()
+ * [medicion] <=
+ * 
  * Recibe las medidas de la base de datos
  *
- *
+ * @param {callback} cb 
+ * @param {number} idUsuario 
+ * @param {number} cuantas 
  */
  async function obtenerUltimasMedicionesDeUsuario(cb,idUsuario,cuantas) {
   fetch(url + 'ultimasMediciones/'+idUsuario+'/'+cuantas, { method: "get" }).then((response) => {
@@ -62,7 +94,11 @@ async function obtenerTodasLasMediciones(cb) {
 }
 
 /**
- * data:json =>
+ * posicion1:Posicion,
+ * posicion2:Posicion,
+ * t_inicio:Z,
+ * t_final:Z,
+ * tipo:Z =>
  *      obtenerMedicionesAcotadas()
  * Medidas:[medida] <=
  * 
