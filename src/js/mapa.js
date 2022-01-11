@@ -4,7 +4,7 @@
 // Fecha: 20/11/2021
 // -------------------------------------------------------------
 var factorInterpolacion = 0;
-
+const apiKey = 'f5d83cc1e4a37d1e1a2834d424e948bc';
 //Margen de tiempo
 //Temporalmente está con un valor fijo para que se vean
 let fechaMax = 1637868163754; //new Date().getTime()
@@ -78,24 +78,55 @@ function crearDivPopoup(so2, no2, co, o3, cerca) {
   return div;
 }
 
-//Markers de ejemplo
-var marker1 = L.marker([38.997852, -0.164307], {
-  icon: EcoParadaMarker,
-}).bindPopup(crearDivPopoup(12, 13, 14, 15, false));
-var marker2 = L.marker([38.997852, -0.165307], {
-  icon: EcoParadaMarker,
-}).bindPopup(crearDivPopoup(12, 17, 14, 15, false));
-var marker3 = L.marker([38.996852, -0.165307], {
-  icon: EcoParadaMarker,
-}).bindPopup(crearDivPopoup(12, 19, 14, 15, false));
-var marker4 = L.marker([38.996852, -0.164307], {
-  icon: EcoParadaMarker,
-}).bindPopup(crearDivPopoup(12, 10, 14, 15, false));
+/**
+ * [marker] =>
+ *      crearMarkers()
+ * 
+ * Crea los marcadores que se le envien
+ * 
+ * @param {array} markers [{lat, lon}]
+ */
+async function crearMarkers(markers) {
+  var ecoparadas = [];
 
-var ecoparadas = [marker1, marker2, marker3, marker4];
-var ecoparadasMapa = L.layerGroup(ecoparadas);
+  for (let index = 0; index < markers.length; index++) {
+    let lat = markers[index].lat;
+    let lon = markers[index].lon;
+    let response = await fetch(`http://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${apiKey}`)
+    let body = await response.json();
+    let co = body.list[0].components.co;
+    let so2 = body.list[0].components.so2;
+    let no = body.list[0].components.no;
+    let o3 = body.list[0].components.o3;
 
-ecoparadasMapa.addTo(map);
+    var marker1 = L.marker([lat, lon], {
+      icon: EcoParadaMarker,
+    }).bindPopup(crearDivPopoup(so2, no, co, o3, false));
+    ecoparadas.push(marker1); 
+  }
+
+  var ecoparadasMapa = L.layerGroup(ecoparadas);
+
+  ecoparadasMapa.addTo(map);
+
+}
+
+const marcadores = [
+  {
+    lat: 38.96797739,
+    lon: -0.19109882
+  },
+  {
+    lat: 39.24621837,
+    lon: -0.3171898
+  },
+  {
+    lat: 38.79521458,
+    lon: -0.6827819
+  }
+];
+
+crearMarkers(marcadores);
 
 /**
  * Mapa IDW de interpolacion con ajustes

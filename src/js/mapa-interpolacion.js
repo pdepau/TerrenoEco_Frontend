@@ -1,6 +1,6 @@
 // -------------------------------------------------------------
 // Autores: Luis Belloch
-// Descripción: Funciones y configuracion del mapa de interpolacion
+// Descripción: Funciones y configuracion del mapa de interpolacion (DESUSO)
 // Fecha: 26/12/2021
 // -------------------------------------------------------------
 var map = L.map('map').setView([-37.87, 175.475], 12);
