@@ -10,9 +10,6 @@ const apiKey = 'f5d83cc1e4a37d1e1a2834d424e948bc';
 let fechaMax = 1637868163754; //new Date().getTime()
 let fechaMin = fechaMax - 3600000;
 
-// Ultimo tipo seleccionado en los botones
-var tipoSeleccionado = 1;
-
 //Layer para el mapa persé
 //No hace falta tocar nada, a menos que se quiera cambiar el estilo
 var baseLayer = L.tileLayer(
@@ -35,6 +32,21 @@ var map = new L.Map("map", {
 });
 
 var bounds = map.getBounds();
+
+/**
+ * Datos base para todo el codigo
+ */
+var datos = {
+  latMax: bounds._northEast.lat,
+  latMin: bounds._southWest.lat,
+  lonMax: bounds._northEast.lng,
+  lonMin: bounds._southWest.lng,
+  tiempoMin: fechaMin,
+  tiempoMax: fechaMax,
+  factor: factorInterpolacion,
+  tipo: datos.tipo,
+};
+
 
 //Estilo para el icono
 var EcoParadaMarker = L.icon({
@@ -226,6 +238,8 @@ map.on("moveend", function (ev) {
   datos.tiempoMax = fechaMax;
   datos.tiempoMin = fechaMin;
 
+  console.debug(datos);
+  
   obtenerMedicionesAcotadas(datos, callbackDatosRecibidos);
 });
 
@@ -317,24 +331,24 @@ function selectorCambiado(tipo, botonPulsado) {
   // activamos el boton que se haya pulsado
   botonPulsado.classList.add("selected");
   switch (true) {
-    case tipo == 1 && tipoSeleccionado != 1:
+    case tipo == 1 && datos.tipo != 1:
       // CO2
       console.debug("CO seleccionado");
-      tipoSeleccionado = 1;
-      obtenerTipo(tipoSeleccionado, actualizarLeyenda);
+      datos.tipo = 1;
+      obtenerTipo(datos.tipo, actualizarLeyenda);
       break;
 
-    case tipo == 2 && tipoSeleccionado != 2:
+    case tipo == 2 && datos.tipo != 2:
       // CO
       console.debug("CO2 seleccionado");
-      tipoSeleccionado = 2;
-      obtenerTipo(tipoSeleccionado, actualizarLeyenda);
+      datos.tipo = 2;
+      obtenerTipo(datos.tipo, actualizarLeyenda);
       break;
-    case tipo == 3 && tipoSeleccionado != 3:
+    case tipo == 3 && datos.tipo != 3:
       // O3
       console.debug("O3 seleccionado");
-      tipoSeleccionado = 3;
-      obtenerTipo(tipoSeleccionado, actualizarLeyenda);
+      datos.tipo = 3;
+      obtenerTipo(datos.tipo, actualizarLeyenda);
       break;
     default:
       break;
@@ -433,20 +447,10 @@ function setup() {
       "tipo":1
     }
   */
-  let datos = {
-    latMax: bounds._northEast.lat,
-    latMin: bounds._southWest.lat,
-    lonMax: bounds._northEast.lng,
-    lonMin: bounds._southWest.lng,
-    tiempoMin: fechaMin,
-    tiempoMax: fechaMax,
-    factor: factorInterpolacion,
-    tipo: tipoSeleccionado,
-  };
   //Llamada a la logica con un callback
   //
   obtenerMedicionesAcotadas(datos, callbackDatosRecibidos);
-  obtenerTipo(tipoSeleccionado, actualizarLeyenda);
+  obtenerTipo(datos.tipo, actualizarLeyenda);
 }
 
 setup();
