@@ -1,0 +1,67 @@
+.contenedor{
+    padding: 32px;
+    margin-left: 80px;
+    background-color: #eeeeee;
+    height: calc(100vh - 54px);
+}
+
+.lista-nodos{
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.nodo{
+    background-color: #fff;
+    padding: 16px;
+    border-radius: 16px;
+
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.categoria-nodo{
+    display: flex;
+}
+
+.estado-nodo{
+    border-radius: 8px;
+    padding: 8px;
+    color: white;
+    min-width: 80px;
+    text-align: center;
+}
+
+.estado-nodo.bien{
+    background-color: #3AB54B;
+}
+
+.estado-nodo.regular{
+    background-color: #f59f4f;
+}
+
+.estado-nodo.mal{
+    background-color: #f54f4f;
+}
+
+.usuario-nodo{
+    padding: 8px;
+    min-width: 250px;
+}
+.id-nodo{
+    padding: 8px;
+}
+
+.leyenda-nodo{
+    color: #888;
+    font-weight: bold;
+    padding: 8px;
+    min-width: 82px;
+}
+
+
+
+@media (max-width: 900px) {
+    .contenedor {
+      margin: 0;
+    }
+  }

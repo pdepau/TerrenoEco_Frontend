@@ -3,6 +3,12 @@
 // Descripción: Funciones y configuracion del mapa leaflet
 // Fecha: 20/11/2021
 // -------------------------------------------------------------
+var factorInterpolacion = 0;
+const apiKey = 'f5d83cc1e4a37d1e1a2834d424e948bc';
+//Margen de tiempo
+//Temporalmente está con un valor fijo para que se vean
+let fechaMax = 1637868163754; //new Date().getTime()
+let fechaMin = fechaMax - 3600000;
 
 //Layer para el mapa persé
 //No hace falta tocar nada, a menos que se quiera cambiar el estilo
@@ -18,24 +24,29 @@ var baseLayer = L.tileLayer(
   }
 );
 
-//Configuracion para el mapa de calor
-var cfg = {
-  // radius should be small ONLY if scaleRadius is true (or small radius is intended)
-  // if scaleRadius is false it will be the constant radius used in pixels
-  radius: 20,
-  maxOpacity: 1,
-  // scales the radius based on map zoom
-  scaleRadius: false,
-  // which field name in your data represents the latitude - default "lat"
-  latField: "lat",
-  // which field name in your data represents the longitude - default "lng"
-  lngField: "lng",
-  // which field name in your data represents the data value - default "value"
-  valueField: "valor",
+//Creación del mapa en el div con id = "map"
+var map = new L.Map("map", {
+  center: new L.LatLng(38.996852, -0.165307),
+  zoom: 13,
+  layers: [baseLayer],
+});
+
+var bounds = map.getBounds();
+
+/**
+ * Datos base para todo el codigo
+ */
+var datos = {
+  latMax: bounds._northEast.lat,
+  latMin: bounds._southWest.lat,
+  lonMax: bounds._northEast.lng,
+  lonMin: bounds._southWest.lng,
+  tiempoMin: fechaMin,
+  tiempoMax: fechaMax,
+  factor: factorInterpolacion,
+  tipo: datos.tipo,
 };
 
-//Layer para el mapa de calor, hasta aquí esta todo como en la api
-var heatmapLayer = new HeatmapOverlay(cfg);
 
 //Estilo para el icono
 var EcoParadaMarker = L.icon({
@@ -79,141 +90,112 @@ function crearDivPopoup(so2, no2, co, o3, cerca) {
   return div;
 }
 
-//Markers de ejemplo
-var marker1 = L.marker([38.997852, -0.164307], {
-  icon: EcoParadaMarker,
-}).bindPopup(crearDivPopoup(12, 13, 14, 15, false));
-var marker2 = L.marker([38.997852, -0.165307], {
-  icon: EcoParadaMarker,
-}).bindPopup(crearDivPopoup(12, 17, 14, 15, false));
-var marker3 = L.marker([38.996852, -0.165307], {
-  icon: EcoParadaMarker,
-}).bindPopup(crearDivPopoup(12, 19, 14, 15, false));
-var marker4 = L.marker([38.996852, -0.164307], {
-  icon: EcoParadaMarker,
-}).bindPopup(crearDivPopoup(12, 10, 14, 15, false));
+/**
+ * [marker] =>
+ *      crearMarkers()
+ * 
+ * Crea los marcadores que se le envien
+ * 
+ * @param {array} markers [{lat, lon}]
+ */
+async function crearMarkers(markers) {
+  var ecoparadas = [];
 
-var ecoparadas = [marker1, marker2, marker3, marker4];
-var ecoparadasMapa = L.layerGroup(ecoparadas);
+  for (let index = 0; index < markers.length; index++) {
+    let lat = markers[index].lat;
+    let lon = markers[index].lon;
+    let response = await fetch(`http://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${apiKey}`)
+    let body = await response.json();
+    let co = body.list[0].components.co;
+    let so2 = body.list[0].components.so2;
+    let no = body.list[0].components.no;
+    let o3 = body.list[0].components.o3;
 
-//Creación del mapa en el div con id = "map"
-var map = new L.Map("map", {
-  center: new L.LatLng(38.996852, -0.165307),
-  zoom: 13,
-  layers: [baseLayer, heatmapLayer, ecoparadasMapa],
-});
+    var marker1 = L.marker([lat, lon], {
+      icon: EcoParadaMarker,
+    }).bindPopup(crearDivPopoup(so2, no, co, o3, false));
+    ecoparadas.push(marker1); 
+  }
 
-//Margenes del mapa en el html
-//En plan la latitud máxima mostrada y tal
-let bounds = map.getBounds();
+  var ecoparadasMapa = L.layerGroup(ecoparadas);
+
+  ecoparadasMapa.addTo(map);
+
+}
+
+const marcadores = [
+  {
+    lat: 38.96797739,
+    lon: -0.19109882
+  },
+  {
+    lat: 39.24621837,
+    lon: -0.3171898
+  },
+  {
+    lat: 38.79521458,
+    lon: -0.6827819
+  }
+];
+
+crearMarkers(marcadores);
+
+/**
+ * Mapa IDW de interpolacion con ajustes
+ * 
+ * opacity - the opacity of the IDW layer
+ * max - maximum point values, 1.0 by default
+ * cellSize - height and width of each cell, 25 by default
+ * exp - exponent used for weighting, 1 by default
+ * gradient - color gradient config, e.g. {0.4: 'blue', 0.65: 'lime', 1: 'red'}
+ */
+var idw = L.idwLayer([
+  [-37.8839, 175.3745188667, 571],
+  [-37.8869090667, 175.3657417333, 486]],
+  {opacity: 0.3, cellSize: 3, exp: 1, max: 1}).addTo(map);
 
 //Funcion que se llama al recibir los datos del servidor
 //Ahora mismo utiliza las medidas acotadas simplemente
 //TODO : Hacer que haga la interpolación y utilice esos datos
 async function callbackDatosRecibidos(x) {
   x = JSON.parse(x);
-
-  //Valores para hacer la cuadricula
-  //Miran el rango de las latitudes y lo dividen en partes
-  let delta = Math.abs(bounds._southWest.lng - bounds._northEast.lng) / 110;
-  let deltaY = Math.abs((bounds._southWest.lat - bounds._northEast.lat) / 110);
-
-  let puntos = [];
-
-  //Crea la cuadricula de puntos con lat y lon
-  for (let a = bounds._southWest.lng; a < bounds._northEast.lng; a += delta) {
-    for (
-      let b = bounds._southWest.lat;
-      b < bounds._northEast.lat;
-      b += deltaY
-    ) {
-      puntos.push({
-        latMax: b + deltaY,
-        latMin: b,
-        lonMax: a + delta,
-        lonMin: a,
-        valor: 0,
-        cuantas: 1,
-      });
-    }
-  }
-
-  //Para cada medida comprueba en que cuadrado debe estar
-  //mira que esté dentro del rango de lat y lon
-  x.forEach((medida) => {
-    puntos.forEach((element) => {
-      if (
-        medida.latitud > element.latMin &&
-        medida.latitud < element.latMax &&
-        medida.longitud > element.lonMin &&
-        medida.longitud < element.lonMax
-      ) {
-        element.valor += (medida.valor - element.valor) / element.cuantas;
-        element.cuantas++;
-      }
-    });
-  });
-
-  //let datos = interpolarMediciones(x, 4);
   //Devuelve la lista de regiones con valores
-  medidasAgeoson(puntos);
+  medidasAgeoson(x);
 }
-
-//Margen de tiempo
-//Temporalmente está con un valor fijo para que se vean
-let fechaMax = 1637868163754; //new Date().getTime()
-let fechaMin = fechaMax - 3600000;
-
-// Ultimo tipo seleccionado en los botones
-var tipoSeleccionado = 1;
 
 //Pasa la lista de medidas formateadas por region a puntos para el mapa
 function medidasAgeoson(medidas) {
   //console.log(medidas);
   let puntos = [];
   medidas.forEach((element) => {
-    puntos.push({
-      lat: (element.latMax + element.latMin) / 2,
-      lng: (element.lonMax + element.lonMin) / 2,
-      valor: element.valor,
-    });
+    // Luis: La libreria idw no usa {lat,lng,valor}, usa un array normal
+    puntos.push([
+      element.lat,
+      element.lng,
+      element.valor/100 // para que este entre 0 y 1
+    ]);
   });
-  //Define el valor de pico
-  var GeoJSON_medidas = {
-    max: 100,
-    data: puntos,
-  };
-  llenarMapa(GeoJSON_medidas);
+
+  llenarMapa(puntos);
 }
 
 //Pone los valores en el layer del mapa de calor
 function llenarMapa(puntos) {
-  heatmapLayer.setData(puntos);
+  // Luis: implementacion de la libreria idw cada vez que se llena de datos. Así creo que
+  // es más rápido al ejecutarse 
+  if(puntos.length < 1) {
+    puntos = [
+      [39.0031, -0.156126, 0.1],
+      [38.9919, -0.147516, 0.74]
+      ];
+  }
+  map.removeLayer(idw);
+  idw = L.idwLayer(puntos,
+    {opacity: 0.3, cellSize: 3, exp: 1, max: 1}).addTo(map);
+  // idw.data = puntos;
+  console.debug(idw.data);
+  // console.debug(idw.data)
 }
-
-//Se llama cada vez que se mueve el mapa
-map.on("moveend", function (ev) {
-  //Vuelve a obtener los margenes tras mover el mapa
-  bounds = map.getBounds();
-
-  //Vuelve a obtener la fecha
-  let fechaMax = 1637868163754; //new Date().getTime()
-  let fechaMin = fechaMax - 3600000;
-
-  //Recalcula el objeto para la llamada
-  let datos = {
-    latMax: bounds._northEast.lat,
-    latMin: bounds._southWest.lat,
-    lonMax: bounds._northEast.lng,
-    lonMin: bounds._southWest.lng,
-    tiempoMin: fechaMin,
-    tiempoMax: fechaMax,
-    factor: 2,
-    tipo: tipoSeleccionado,
-  };
-
-  obtenerMedicionesAcotadas(datos, callbackDatosRecibidos);
-});
 
 var MarkerUbicacion = L.icon({
   iconUrl: "img/ubicador.svg",
@@ -243,7 +225,60 @@ function ponerUbicacion() {
   map.on("locationerror", onLocationError);
 }
 
-//Obtiene la leyenda
+//Se llama cada vez que se mueve el mapa
+map.on("moveend", function (ev) {
+  //Vuelve a obtener los margenes tras mover el mapa
+  bounds = map.getBounds();
+
+  //Vuelve a obtener la fecha
+  fechaMax = 1640524043187; //new Date().getTime()
+  fechaMin = fechaMax - 3600000;
+
+  //Recalcula el objeto para la llamada
+  datos.tiempoMax = fechaMax;
+  datos.tiempoMin = fechaMin;
+
+  console.debug(datos);
+  
+  obtenerMedicionesAcotadas(datos, callbackDatosRecibidos);
+});
+
+document.getElementById("fecha").addEventListener("input", (event) => {
+  console.log(`Te gusta el sabor ${event.target.value}`);
+  let date = new Date(event.target.value);
+  date.setHours(document.getElementById("hora").value);
+  console.log(date);
+
+  //Vuelve a obtener la fecha
+  fechaMax = date.getTime(); //new Date().getTime()
+  fechaMin = fechaMax - 3600000;
+
+  //Recalcula el objeto para la llamada
+  datos.tiempoMax = fechaMax;
+  datos.tiempoMin = fechaMin;
+
+  obtenerMedicionesAcotadas(datos, callbackDatosRecibidos);
+});
+
+document.getElementById("hora").addEventListener("change", (event) => {
+  let date = new Date(document.getElementById("fecha").value);
+  date.setHours(document.getElementById("hora").value);
+  console.log(date);
+
+  //Vuelve a obtener la fecha
+  fechaMax = date.getTime(); //new Date().getTime()
+  fechaMin = fechaMax - 3600000;
+
+  //Recalcula el objeto para la llamada
+  datos.tiempoMax = fechaMax;
+  datos.tiempoMin = fechaMin;
+
+  obtenerMedicionesAcotadas(datos, callbackDatosRecibidos);
+});
+
+// -------------------------------------------------------------
+// LEYENDA
+// -------------------------------------------------------------
 let leyenda = document.getElementById("leyenda");
 //Ocultar y mostrar los datos para la leyenda
 //No tiene nada que ver con el mapa persé
@@ -274,6 +309,9 @@ leyenda.addEventListener("click", function () {
   }
 });
 
+// -------------------------------------------------------------
+// FUNCIONES
+// -------------------------------------------------------------
 /**
  * tipo:Z =>
  *      selectorCambiado()
@@ -293,24 +331,24 @@ function selectorCambiado(tipo, botonPulsado) {
   // activamos el boton que se haya pulsado
   botonPulsado.classList.add("selected");
   switch (true) {
-    case tipo == 1 && tipoSeleccionado != 1:
+    case tipo == 1 && datos.tipo != 1:
       // CO2
       console.debug("CO seleccionado");
-      tipoSeleccionado = 1;
-      obtenerTipo(tipoSeleccionado, actualizarLeyenda);
+      datos.tipo = 1;
+      obtenerTipo(datos.tipo, actualizarLeyenda);
       break;
 
-    case tipo == 2 && tipoSeleccionado != 2:
+    case tipo == 2 && datos.tipo != 2:
       // CO
       console.debug("CO2 seleccionado");
-      tipoSeleccionado = 2;
-      obtenerTipo(tipoSeleccionado, actualizarLeyenda);
+      datos.tipo = 2;
+      obtenerTipo(datos.tipo, actualizarLeyenda);
       break;
-    case tipo == 3 && tipoSeleccionado != 3:
+    case tipo == 3 && datos.tipo != 3:
       // O3
       console.debug("O3 seleccionado");
-      tipoSeleccionado = 3;
-      obtenerTipo(tipoSeleccionado, actualizarLeyenda);
+      datos.tipo = 3;
+      obtenerTipo(datos.tipo, actualizarLeyenda);
       break;
     default:
       break;
@@ -409,20 +447,10 @@ function setup() {
       "tipo":1
     }
   */
-  let datos = {
-    latMax: bounds._northEast.lat,
-    latMin: bounds._southWest.lat,
-    lonMax: bounds._northEast.lng,
-    lonMin: bounds._southWest.lng,
-    tiempoMin: fechaMin,
-    tiempoMax: fechaMax,
-    factor: 2,
-    tipo: tipoSeleccionado,
-  };
   //Llamada a la logica con un callback
   //
   obtenerMedicionesAcotadas(datos, callbackDatosRecibidos);
-  obtenerTipo(tipoSeleccionado, actualizarLeyenda);
+  obtenerTipo(datos.tipo, actualizarLeyenda);
 }
 
 setup();

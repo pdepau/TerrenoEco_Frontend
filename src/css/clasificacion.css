@@ -273,3 +273,13 @@ td:last-child {
     width: 30px;
     margin: 0 5px;
 }
+
+
+
+
+
+@media (max-width: 900px) {
+    #contenedor {
+      margin: 0;
+    }
+  }

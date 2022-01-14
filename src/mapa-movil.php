@@ -35,12 +35,13 @@
         <!-- AQUI TERMINA EL MAPA-->
 
 
-        <div id="switch" style="top: 2%;right: 2%">
-            <button id="switchB1" onclick='selectorCambiado(1)'>CO</button>
+        <div id="switch">
+            <button id="switchB1" class="selected" onclick='selectorCambiado(1, this)'>CO</button>
 
-            <button id="switchB2" onclick='selectorCambiado(2)'>CO2</buttona>
+            <button id="switchB2" class="" onclick='selectorCambiado(2, this)'>CO₂</buttona>
 
-                <button id="switchB3" onclick='selectorCambiado(3)'>O3</button>
+            <button id="switchB3" class="" onclick='selectorCambiado(3, this)'>O₃</button>
+
         </div>
 
 
@@ -53,11 +54,7 @@
             <div class="ecoparada-leyenda"><img src="img/Ecoparada.png" alt="ecoparada" id="ecoparada-img">Ecoparada</div>
         </div>
 
-
-
-
     </div>
-
 
 </body>
 <script src="js/heatmap.min.js"></script>
@@ -65,5 +62,6 @@
 <script src="js/Punto.js"></script>
 <script src="js/proxy.js"></script>
 <script src=js/mapa.js></script>
+<script src="leaflet-idw.js"></script>
 
 </html>
