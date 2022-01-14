@@ -1,64 +1,96 @@
 #contenedor {
     margin-left: 80px;
-    padding: 32px;
-    background-color: #eeeeee;
+    height: 92vh;
+    
+    width: 100%;
     font-family: Roboto;
-    text-align: justify;
+    font-size: 14px;
 }
-.ordenador{
+
+
+.ordenador {
     padding-right: 80px;
 }
-h1{
+
+h1 {
     text-align: center;
 }
+h2{
+    text-align: center;
+}
+
+
+
+
+
+th {
+
+    background: #666666;
+    border-collapse: collapse;
+    color: white;
+}
+
+td {
+
+    padding-right: 2px;
+    padding-left: 2px;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.berde {
+    background: #b0f2c2;
+}
+
+.naranga {
+    background: #ffda9e;
+}
+
+.rogo {
+    background: #fabfb7;
+}
+
+
+.prueba{
+text-align: center;
+
+    align-items: center;
+    margin-right: 40%;
+    margin-left: 40%;
+}
+.marco{
+    background-color: #ffffff;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 1%;
+    box-shadow: 0 14px 28px rgba(100, 0, 100, 0.35), 0 10px 10px rgba(0, 0, 0, 0.22);
+    left: 50%;
+    padding-right: 50px;
+    padding-left: 50px;
+    padding-bottom: 50px;
+    padding-top: 10px;
+    border-radius: 5px;
+    width: 70%;
+    height: 750px;
+
+}
+
 
 .tabla {
     border-collapse: collapse;
-    color:white; 
-    width: 100%;
-
-}
-th{
-    text-align: center;
-    padding: 8px;
-    background: #666666;
-    border-collapse: collapse;
-    color:white;
-}
-td {
-
-    padding: 8px;
-    border-collapse: collapse;
-    text-align: justify;
+    color: black;
+    margin-left: 60px;
+    margin-right: 60px;
+    font-size: small;
+    background-color: black;
 }
 
-.berde{
-    background: #3AB54B;
+input{
+    display: none;
+    padding-left: 15px;
+}
+:checked{
+    background-color: #3ab54b;
 }
 
-.naranga{
-    background: #F59F4F;
-}
 
-.rogo{
-    background: #F54F4F;
-}
-
-.link-descarga {
-    margin: 10px;
-    padding: 5px;
-    background: #820053;
-    color: white;
-    border: 2px solid black;
-    border-radius: 20px;
-    height: 35px;
-    text-align: center;
-    font-size: 16px;
-    text-decoration: none;
-}
-
-@media (max-width: 900px) {
-    #contenedor {
-      margin: 0;
-    }
-  }
