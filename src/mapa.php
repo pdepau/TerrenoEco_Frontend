@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -40,14 +40,57 @@
 
 
         <!-- AQUI TERMINA EL MAPA-->
+        <div class="filtros">
+            <div id="switch">
+                <button id="switchB1" class="selected" onclick='selectorCambiado(1, this)'>CO</button>
 
-        <div id="switch">
-            <button id="switchB1" class="selected" onclick='selectorCambiado(1, this)'>CO</button>
-
-            <button id="switchB2" class="" onclick='selectorCambiado(2, this)'>CO₂</buttona>
+                <button id="switchB2" class="" onclick='selectorCambiado(2, this)'>CO₂</button>
 
                 <button id="switchB3" class="" onclick='selectorCambiado(3, this)'>O₃</button>
 
+            </div>
+            <div class="toggle-fechas">
+                Seleccionar fechas
+                <label class="switch">
+                    <input type="checkbox" id="seleccionFecha">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+            <div class="selectores" id="selectores">
+                <div class="selector-fecha">
+                    <label for="fecha">Fecha :</label>
+                    <input type="date" id="fecha" name="fecha-inicio-medidas" min="2021-09-01" max="2022-09-01">
+                </div>
+                <div class="selector-hora">
+                    <label for="hora">Hora :</label>
+                    <select name="hora" id="hora">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                        <option value="20">20</option>
+                        <option value="21">21</option>
+                        <option value="22">22</option>
+                        <option value="23">23</option>
+                        <option value="24">24</option>
+                    </select>
+                </div>
+            </div>
         </div>
 
         <div id="leyenda" class="expandido">
@@ -71,6 +114,8 @@
 <script src=js/mapa.js></script>
 
 
-<script>ponerUbicacion()</script>
+<script>
+    ponerUbicacion()
+</script>
 
 </html>
