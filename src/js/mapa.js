@@ -219,20 +219,45 @@ map.on("moveend", function (ev) {
   bounds = map.getBounds();
 
   //Vuelve a obtener la fecha
-  let fechaMax = 1640524043187; //new Date().getTime()
-  let fechaMin = fechaMax - 3600000;
+  fechaMax = 1640524043187; //new Date().getTime()
+  fechaMin = fechaMax - 3600000;
 
   //Recalcula el objeto para la llamada
-  let datos = {
-    latMax: bounds._northEast.lat,
-    latMin: bounds._southWest.lat,
-    lonMax: bounds._northEast.lng,
-    lonMin: bounds._southWest.lng,
-    tiempoMin: fechaMin,
-    tiempoMax: fechaMax,
-    factor: factorInterpolacion,
-    tipo: tipoSeleccionado,
-  };
+  datos.tiempoMax = fechaMax;
+  datos.tiempoMin = fechaMin;
+
+  obtenerMedicionesAcotadas(datos, callbackDatosRecibidos);
+});
+
+document.getElementById("fecha").addEventListener("input", (event) => {
+  console.log(`Te gusta el sabor ${event.target.value}`);
+  let date = new Date(event.target.value);
+  date.setHours(document.getElementById("hora").value);
+  console.log(date);
+
+  //Vuelve a obtener la fecha
+  fechaMax = date.getTime(); //new Date().getTime()
+  fechaMin = fechaMax - 3600000;
+
+  //Recalcula el objeto para la llamada
+  datos.tiempoMax = fechaMax;
+  datos.tiempoMin = fechaMin;
+
+  obtenerMedicionesAcotadas(datos, callbackDatosRecibidos);
+});
+
+document.getElementById("hora").addEventListener("change", (event) => {
+  let date = new Date(document.getElementById("fecha").value);
+  date.setHours(document.getElementById("hora").value);
+  console.log(date);
+
+  //Vuelve a obtener la fecha
+  fechaMax = date.getTime(); //new Date().getTime()
+  fechaMin = fechaMax - 3600000;
+
+  //Recalcula el objeto para la llamada
+  datos.tiempoMax = fechaMax;
+  datos.tiempoMin = fechaMin;
 
   obtenerMedicionesAcotadas(datos, callbackDatosRecibidos);
 });
